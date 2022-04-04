@@ -4,8 +4,12 @@ from .models import Project, Customer, Tool
 
 
 def home(request):
-    project_list = Project.objects.order_by('project_name')
-    diction= {'project_list':project_list}
+    diction= {}
     return render(request, 'core/home.html', context=diction) 
 
+def projects(request):
+    project_list = Project.objects.order_by('project_name')
+    diction= {'project_list':project_list}
+    return render(request, 'core/projects.html', context=diction) 
+  
 
