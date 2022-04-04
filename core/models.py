@@ -8,7 +8,7 @@ from django.urls import clear_script_prefix
 
 
 class Tools(models.Model):
-    name = models.CharField(null=True, blank=True)
+    name = models.CharField(max_length=100, blank=True)
 
 class Project(models.Model):
     project_name = models.CharField(max_length=100, null=True, blank=Tree)

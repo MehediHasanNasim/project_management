@@ -1,3 +1,4 @@
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'core'
 ]
 
 MIDDLEWARE = [
@@ -110,9 +112,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    STATIC_DIR, 
-]
+# STATICFILES_DIRS = [
+#     STATIC_DIR, 
+# ]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = STATIC_DIR/ 'media'
+ 
