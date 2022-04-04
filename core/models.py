@@ -60,7 +60,13 @@ class Task(models.Model):
 
 
     def __str__(self):
-        return self.devoloper_name
+        return self.task_name
+
+
+
+
+
+
 
 
 
