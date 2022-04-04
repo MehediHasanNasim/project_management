@@ -14,7 +14,7 @@ class Customer(models.Model):
 
 
 class Tools(models.Model):
-    name = models.CharField(null=True, blank=True)
+    name = models.CharField(max_length=100, blank=True)
 
 
 class Project(models.Model):
