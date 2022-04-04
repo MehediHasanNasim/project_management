@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from core import models 
-from .models import Project, Customer, Tools 
+from .models import Project, Customer, Tool
 
 
 def home(request):
