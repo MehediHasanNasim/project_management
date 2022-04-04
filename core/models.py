@@ -7,7 +7,7 @@ from django.urls import clear_script_prefix
 
 
 class Customer(models.Model):
-    name = models.CharField(max_length=20)
+    customer_name = models.CharField(max_length=20)
     email = models.EmailField(max_length=64)
     phone = models.CharField(max_length=32)
     organization = models.CharField(max_length=20)
@@ -16,8 +16,8 @@ class Customer(models.Model):
         return self.name
 
 
-class Tools(models.Model):
-    name = models.CharField(max_length=100, blank=True)
+class Tool(models.Model):
+    tool_name = models.CharField(max_length=100, blank=True)
     def __str__(self):
         return self.name
 
@@ -26,8 +26,33 @@ class Project(models.Model):
     project_name = models.CharField(max_length=100, null=True, blank=Tree)
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
-    tools = models.ManyToManyField(Tools, blank=True)
+    tool = models.ManyToManyField(Tool, blank=True)
     customer = models.ForeignKey(Customer, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.project_name
+
+
+
+class Developer(models.Model):
+    devoloper_name = models.CharField(max_length=32, blank=True)
+
+    def __str__(self):
+        return self.devoloper_name
+
+class Task(models.Model):
+    task_name = models.CharField(max_length=128, null=True, blank=True)
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
+    actualTime = models.DateField(null=True, blank=True)
+    developer = models.ManyToManyField(Developer, blank=True)
+
+    def __str__(self):
+        return self.devoloper_name
+
+
+
+    
+
+
+
