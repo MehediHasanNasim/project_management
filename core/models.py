@@ -15,10 +15,16 @@ class Customer(models.Model):
 
 class Tools(models.Model):
     name = models.CharField(max_length=100, blank=True)
+    def __str__(self):
+        return self.name
 
 
 class Project(models.Model):
     project_name = models.CharField(max_length=100, null=True, blank=Tree)
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
-    tools = models.ManyToManyField(Tools, null=True, blank=True)
+    tools = models.ManyToManyField(Tools, blank=True)
+    customer = models.ForeignKey(Customer, null=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.project_name
