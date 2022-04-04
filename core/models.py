@@ -8,9 +8,12 @@ from django.urls import clear_script_prefix
 
 class Customer(models.Model):
     name = models.CharField(max_length=20)
-    email = models.EmailField()
-    phone = models.IntegerField()
+    email = models.EmailField(max_length=64)
+    phone = models.CharField(max_length=32)
     organization = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
 
 
 class Tools(models.Model):
