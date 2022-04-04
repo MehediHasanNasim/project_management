@@ -26,8 +26,9 @@
     <div class="card-body text-dark">   
         {% if project_list %}
 
-        {% for project in project_list  %}
+        {{project_list}}
 
+        {% for project in project_list  %}
 
         <table class="table">
             <thead>
@@ -46,12 +47,16 @@
                 <td>{{ project.project_name }}</td>
                 <td>{{ project.start_date }}</td>
                 <td>{{ project.end_date }}</td>
-                <td>{{ project.tool }}</td>
-                <td>{{ project.customer.customer_name }}</td>
-              </tr>
-        
-    
+                <td> 
+                  {% for i in project.tool.all %}
+                    {{ i }},    
+                  {% endfor %}
+                </td>
+                <td>{{ project.customer.customer_name }}
 
+                </td>
+              </tr>
+      
         
         {% endfor %}
         
