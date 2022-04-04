@@ -1,0 +1,78 @@
+{% extends 'core/base.html' %}
+{% load static %}
+    
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/notfound.css' %}">
+{% endblock extracss %}
+
+    
+{% block title %}
+        Add Project
+{% endblock title %}  
+
+
+
+
+{% block bodycontent %}
+
+<h1><a class="nav-link heading_write" href="{% url 'home' %}">Back to Home?</a></h1>
+<div class=" div_main div_register">
+    <div >
+        <div>
+            <h1 class="h1">Add Project</h1>
+        </div>
+        <div >      
+                {% for message in messages %}
+                    <h5 class="alert alert-warning">{{ message  }}</h5>
+                {% endfor %}              
+                
+            <form class="form_register" action="" method="POST">
+             
+                {% csrf_token %}
+
+                <div>
+
+                    <label class="form-control-label mt-3"><b>Username:</b></label>
+                    
+                    <input type="text" class="form-control" name="username" placeholder="Username" required>
+
+                    <label class="form-control-label mt-3"><b>Email:</b></label>
+                    {% if myform.errors.email %}
+                        <h6 class="text-danger">{{ myform.errors.email  }}</h6>
+                    {% endif %}
+                    <input type="email" class="form-control" name="email" placeholder="xyz@gmail.com" required>
+        
+                    <label class="form-control-label mt-3"><b>Password:</b></label>
+                    {% if myform.errors.password1 %}
+                        <h6 class="text-danger">{{ myform.errors.password1  }}</h6>
+                    {% endif %}
+                    <input type="password" class="form-control" name="password1" placeholder="********" required>
+
+                    <label class="form-control-label mt-3"><b>Confirm:</b></label>
+                    {% if myform.errors.password2 %}
+                        <h6 class="text-danger">{{ myform.errors.password2  }}</h6>
+                    {% endif %}
+                    <input type="password" class="form-control" name="password2" placeholder="********" required>
+ 
+        
+                    <button class="btn btn-primary mt-3 submit">Signup</button>
+                    <input type="reset" class="btn btn-warning mt-3" value="Reset">
+                </div>
+            </form>
+            <div class="text-center"><a class="submitr" href="{% url 'loginpage' %}">Already have account? login</a></div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock bodycontent %}
+    
+
+{% block extrajs %}
+<script>
+    $(document).ready(function () {
+      window.history.replaceState('', '', window.location.href);
+    });
+  </script>
+{% endblock extrajs %}
+    
