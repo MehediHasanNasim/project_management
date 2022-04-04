@@ -19,9 +19,37 @@
 <div> 
 
 </div>
-<div class="w3-container">
-    <p>    <h1> its working </h1>  </p>
-  </div>
+
+
+  <div class="card div_main div_register ">
+    <h1 class=" text-white " >Projects</h1><br>
+    <div class="card-body text-dark">   
+        {% if project_list %}
+
+        {% for project in project_list  %}
+
+        <li> 
+            <a  class="div_register" >
+              Project Name: {{ project.project_name }} <br>
+              Start_date: {{ project.start_date }} <br>
+              End_date: {{ project.end_date }} <br>
+              Tools: {{ project.tools }} <br>
+              Customer: {{ project.customer }}
+             </a>
+        </li>
+
+    
+
+        
+        {% endfor %}
+        
+        {% else %}
+    
+        <h2>No Projects</h2>
+        {% endif %}
+    </div>
+</div>
+
 
 {% endblock bodycontent %}
 
