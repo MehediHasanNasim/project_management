@@ -13,13 +13,13 @@ class Customer(models.Model):
     organization = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.name
+        return self.customer_name
 
 
 class Tool(models.Model):
     tool_name = models.CharField(max_length=100, blank=True)
     def __str__(self):
-        return self.name
+        return self.tool_name
 
 
 class Project(models.Model):
