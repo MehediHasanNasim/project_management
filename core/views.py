@@ -1,7 +1,7 @@
 from multiprocessing import context
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from core import models 
-from .models import Project, Customer, Tool
+from .models import Project, Customer, Task, Tool
 
 
 def home(request):
@@ -16,4 +16,12 @@ def projects(request):
     diction= {'project_list':project_list}
     return render(request, 'core/projects.html', context=diction) 
   
+def task(request, pk):
+
+    tasks = Task.objects.all()
+    context = {
+        'tasks': tasks,
+    }
+
+    return render(request, 'core/task.html', context)
 
