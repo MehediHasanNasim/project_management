@@ -7,7 +7,7 @@
 
     
 {% block title %}
-    home
+    projects
 {% endblock title %} 
 
     
@@ -16,13 +16,8 @@
 
     
 {% block bodycontent %}
-
-
-
 <div> 
 
-
-<h1> welcome to home </h>
 </div>
 
 
@@ -31,9 +26,8 @@
     <div class="card-body text-dark">   
         {% if project_list %}
 
-        {{project_list}}
-
         {% for project in project_list  %}
+
 
         <table class="table">
             <thead>
@@ -52,20 +46,18 @@
                 <td>{{ project.project_name }}</td>
                 <td>{{ project.start_date }}</td>
                 <td>{{ project.end_date }}</td>
-                <td> 
-                  {% for i in project.tool.all %}
-                    {{ i }},    
-                  {% endfor %}
-                </td>
-                <td>{{ project.customer.customer_name }}
-
-                </td>
+                <td>{{ project.tool.Tool.tool_name }}</td>
+                <td>{{ project.customer.customer_name }}</td>
               </tr>
-      
+              
+        
+    
+
         
         {% endfor %}
         
         {% else %}
+       
     
         <h2>No Projects</h2>
         {% endif %}
