@@ -16,23 +16,16 @@
 
     
 {% block bodycontent %}
-<div> 
-
-</div>
 
 
-  <div class="card div_main div_register ">
+<div class="card div_main div_register ">
     <h1 class=" text-white " >Projects</h1><br>
     <div class="card-body text-dark">   
-        {% if project_list %}
-
-        {% for project in project_list  %}
-
 
         <table class="table">
+
             <thead>
               <tr>
-                <th scope="col">#</th>
                 <th scope="col">Project Name</th>
                 <th scope="col">Start_date</th>
                 <th scope="col">End_date</th>
@@ -41,23 +34,30 @@
               </tr>
             </thead>
             <tbody>
+              {% if project_list %}
+
+              {% for project in project_list  %}
               <tr>
-                <th scope="row">1</th>
                 <td>{{ project.project_name }}</td>
                 <td>{{ project.start_date }}</td>
                 <td>{{ project.end_date }}</td>
-                <td>{{ project.tool.Tool.tool_name }}</td>
-                <td>{{ project.customer.customer_name }}</td>
-              </tr>
-              
-        
-    
+                <td> 
+                  {% for i in project.tool.all %}
+                    {{ i }},    
+                  {% endfor %}
+                </td>
+                <td>{{ project.customer.customer_name }}
 
-        
-        {% endfor %}
-        
-        {% else %}
-       
+                </td>
+              </tr>
+              {% endfor %}
+                
+              {% else %}
+            </tbody>
+                    
+
+      
+
     
         <h2>No Projects</h2>
         {% endif %}
