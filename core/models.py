@@ -23,6 +23,8 @@ class Tool(models.Model):
 
 
 class Project(models.Model):
+
+    
     project_name = models.CharField(max_length=100, null=True, blank=Tree)
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
@@ -34,11 +36,19 @@ class Project(models.Model):
 
 
 
+
 class Developer(models.Model):
     devoloper_name = models.CharField(max_length=32, blank=True)
 
     def __str__(self):
         return self.devoloper_name
+
+class TaskPriority(models.Model):
+    priority = models.CharField(max_length=32, null=True, blank=True)
+
+    def __str__(self):
+        return self.priority
+
 
 class Task(models.Model):
     task_name = models.CharField(max_length=128, null=True, blank=True)
@@ -46,6 +56,8 @@ class Task(models.Model):
     end_date = models.DateField(null=True, blank=True)
     actualTime = models.DateField(null=True, blank=True)
     developer = models.ManyToManyField(Developer, blank=True)
+    priority = models.ForeignKey(TaskPriority, null=True, blank=True, on_delete=models.CASCADE)
+
 
     def __str__(self):
         return self.devoloper_name
