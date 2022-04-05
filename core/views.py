@@ -1,4 +1,5 @@
 from multiprocessing import context
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from core import models 
 from .models import Project, Customer, Task, Tool
@@ -16,12 +17,25 @@ def projects(request):
     diction= {'project_list':project_list}
     return render(request, 'core/projects.html', context=diction) 
   
+
 def task(request, pk):
 
-    tasks = Task.objects.all()
+    tasks = Project.objects.get(id=pk).project_task.all()
     context = {
         'tasks': tasks,
     }
 
     return render(request, 'core/task.html', context)
+
+def addTask(request):
+
+    project = Project.objects.get(pk = 1)
+    print(request.POST)
+    
+    return render(request, 'core/addtask.html')
+
+
+def test(request, pk):
+
+    return HttpResponse('hi')
 
