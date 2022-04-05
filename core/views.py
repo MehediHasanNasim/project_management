@@ -61,7 +61,7 @@ def addTask(request):
         end_date = request.POST.get('end_date')
         print(end_date)
     
-
+    taskform = TaskForm()
     developers =  Developer.objects.all()
     prioritys = TaskPriority.objects.all()
     project = Project.objects.get(id=1)
@@ -70,13 +70,11 @@ def addTask(request):
         'developers': developers,
          'prioritys': prioritys,
          'project': project,
+         'form': taskform
     }
 
  
     if request.method == 'POST':
-
-
-        
 
         task_name = request.POST.get('task_name')
         start_date = request.POST.get('start_date')
@@ -87,12 +85,9 @@ def addTask(request):
         priority = request.POST.get('priority')
         end_date = request.POST.get('end_date')
 
-
-         
         devs = Developer.objects.filter(id__in = developer)
         priority = TaskPriority.objects.get(id=priority)
 
-       
         t = Task(task_name = task_name, start_date=start_date, end_date = end_date, actualTime=actualTime, priority=priority, project=project)    
         t.save()
         for i in devs:
