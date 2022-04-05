@@ -1,3 +1,5 @@
+from dataclasses import field
+from pyexpat import model
 from django import forms
 from core import models
 from django.contrib.auth.forms import UserCreationForm
@@ -11,7 +13,17 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         fields = '__all__'
-        
+
+
+
+class TaskForm(forms.ModelForm):
+
+    class  Meta:
+        model = Task
+        fields = '__all__'
+
+
+      
 
         
 

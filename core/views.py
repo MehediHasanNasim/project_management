@@ -5,7 +5,8 @@ from core import models
 from core.form import ProjectForm 
 from .models import Developer, Project, Customer, Tool
 from core import models 
-from .models import Project, Customer, Task, Tool
+from .models import Project, Customer, Task, Tool, TaskPriority
+from . form import TaskForm
 
 
 def home(request):
@@ -23,6 +24,7 @@ def projects(request):
     return render(request, 'core/projects.html', context=diction) 
 
 def add_project(request):
+
     myform = ProjectForm()
     if request.method == 'POST':
             
@@ -45,6 +47,7 @@ def add_project(request):
 
 def task(request, pk):
 
+
     tasks = Project.objects.get(id=pk).project_task.all()
     context = {
         'tasks': tasks,
@@ -53,22 +56,44 @@ def task(request, pk):
     return render(request, 'core/task.html', context)
 
 def addTask(request): 
+
+    if request.method == 'POST':
+        end_date = request.POST.get('end_date')
+        print(end_date)
+    
+    taskform = TaskForm()
+    developers =  Developer.objects.all()
+    prioritys = TaskPriority.objects.all()
+    project = Project.objects.get(id=1)
+
+    context = {
+        'developers': developers,
+         'prioritys': prioritys,
+         'project': project,
+         'form': taskform
+    }
+
  
     if request.method == 'POST':
-        d = Developer.objects.get(id=1)
 
-        # p = Project.objects.get(id = 1)
-        t = Task(task_name = 'No Task')
-        t.developer.add(d)
+        task_name = request.POST.get('task_name')
+        start_date = request.POST.get('start_date')
+        end_date = request.POST.get('end_date')
+        actualTime = request.POST.get('actualTime')
+        developer = request.POST.get('developer')
+        #project = request.POST.get('project')
+        priority = request.POST.get('priority')
+        end_date = request.POST.get('end_date')
 
+        devs = Developer.objects.filter(id__in = developer)
+        priority = TaskPriority.objects.get(id=priority)
 
-       # 
-       # t.project.add(p)
-        #t.save()
+        t = Task(task_name = task_name, start_date=start_date, end_date = end_date, actualTime=actualTime, priority=priority, project=project)    
+        t.save()
+        for i in devs:
+            t.developer.add(i)
 
-    print(request.POST)
-
-    return render(request, 'core/addtask.html')
+    return render(request, 'core/addtask.html', context)
 
 
 def test(request, pk):
