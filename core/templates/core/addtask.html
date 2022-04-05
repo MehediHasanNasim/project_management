@@ -1,0 +1,73 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}
+    projects
+{% endblock title %} 
+
+{% block homeactive %}
+{% endblock homeactive %}
+    
+{% block bodycontent %}
+
+<form method="POST">
+    {% csrf_token %}
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Task Name</label>
+      <input name="task_name" type="text" class="form-control" id="inputEmail4" placeholder="Task Name">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Project Name</label>
+      <input  name="project_name" type="text" class="form-control" id="inputPassword4" placeholder="" disabled>
+    </div>
+  </div>
+  
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">Start Time</label>
+      <input name="start_date" type="text" class="form-control" id="inputCity">
+    </div>
+   
+    <div class="form-group col-md-6">
+      <label for="inputZip">Hour Complete Task</label>
+      <input name="end_date" type="text" class="form-control" id="inputZip">
+    </div>
+  </div>
+
+ <div class="form-row">
+  
+    <div class="form-group col-md-4">
+      <label for="inputState">Developer</label>
+      <select name="developer" multiple iple id="inputState" class="form-control">
+        <option value="1">Apel Mahmud</option>
+        <option value="2">Orkut Mahmud</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-4">
+      <label for="inputZip">Devoloper List</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+
+     <div class="form-group col-md-4">
+      <label for="inputState">Priority</label>
+      <select name="priority" id="inputState" class="form-control">
+        <option disabled selected>Choose...</option>
+        <option>Low</option>
+        <option>Mid</option>
+        <option>High</option>
+      </select>
+    </div>
+  </div>
+
+  <input type="submit" class="btn btn-primary">Sign in</input>
+</form>
+
+
+{% endblock bodycontent %}
+
+    
+{% block extrajs %}
+{% endblock extrajs %}
+    

@@ -18,8 +18,11 @@
 {% block bodycontent %}
 
 
+
 <div class="card div_main div_register ">
-    <h1 class="text-white">Projects</h1><br>
+    <h1 class="">
+          <a href="" class="bnt btn-sm btn-success" >Add Task</a>
+    </h1><br>
     <div class="card-body text-dark">   
 
         <table class="table">
@@ -38,7 +41,7 @@
 
               {% for task in tasks  %}
               <tr>
-                <td>{{ task.task_name }}</td>
+                <td>{{ task.task_name }} </td>
                 <td>{{ task.start_date }}</td>
                 <td>{{ task.end_date }}</td>
                 <td> 
