@@ -37,6 +37,7 @@ def add_project(request):
                 
 
         diction = {'myform':myform}
+        
         return render(request, 'core/usersignup.html', context=diction)
     
 
@@ -54,8 +55,11 @@ def task(request, pk):
 def addTask(request): 
 
     if request.method == 'POST':
+        p = Project.objects.get(id =1)
         t = Task(task_name = 'No Task')
-       # p = Project.objects.get(id =1)
+        
+
+       # 
        # t.project.add(p)
         t.save()
 
