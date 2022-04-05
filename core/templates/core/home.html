@@ -1,7 +1,8 @@
-{% extends 'core/base.html' %} 
-{% load static %} 
-{% block title %}
- home 
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %} 
+home
 {%endblock title %} 
 
 {% block homeactive %} 
@@ -9,8 +10,7 @@
 
 {% block bodycontent %}
 
-<<<<<<< HEAD
-<br />
+<br>
 <div class="row">
   {% for project in projects %}
   <div class="col-md-4">
@@ -24,27 +24,35 @@
         </p>
         <p class="card-text">Progress: 90%</p>
         <a class="btn btn-primary" href="{% url 'task' project.id %}">View</a>
-=======
-<br>
-  <div class="row">
+        <br />
+        <div class="row">
+          {% for project in projects %}
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{project.project_name}}</h5>
+                <hr />
+                <p class="card-text">
+                  Client: {{project.customer.customer_name}}
+                </p>
+                <p class="card-text">
+                  Deadline: {{project.end_date}} to {{project.start_date}}
+                </p>
+                <p class="card-text">Progress: 90%</p>
+                <a class="btn btn-primary" href="{% url 'task' project.id %} "
+                  >View</a
+                >
+              </div>
+            </div>
+          </div>
+          {% endfor %} 
 
-    {% for project in projects  %}
-      <div class="col-md-4">
-      <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">{{project.project_name}}</h5>
-            <hr>
-            <p class="card-text">Client: {{project.customer.customer_name}}</p>
-            <p class="card-text">Deadline: {{project.end_date}} to {{project.start_date}}</p>
-            <p class="card-text">Progress: 90%</p>
-            <a class="btn btn-primary" href="{% url 'task' project.id %} ">View</a>
->>>>>>> e40f06da6f0b21975c9a78c300b5d752046c9e05
+        </div>
       </div>
     </div>
   </div>
-  {% endfor %} 
-{% endblock bodycontent %} 
+</div>
+{% endblock bodycontent %}
 
 {% block extrajs %} 
 {% endblock extrajs %}
-</div>
