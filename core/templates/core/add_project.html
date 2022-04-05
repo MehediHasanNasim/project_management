@@ -21,10 +21,7 @@
         <div>
             <h1 class="h1">Add Project</h1>
         </div>
-        <div >      
-                {% for message in messages %}
-                    <h5 class="alert alert-warning">{{ message  }}</h5>
-                {% endfor %}              
+        <div >        
                 
             <form class="form_register" action="" method="POST">
              
@@ -34,33 +31,25 @@
 
                     <label class="form-control-label mt-3"><b>Username:</b></label>
                     
-                    <input type="text" class="form-control" name="username" placeholder="Username" required>
+                    <input type="text" class="form-control" name="customer_name" placeholder="Customer name" required>
 
                     <label class="form-control-label mt-3"><b>Email:</b></label>
-                    {% if myform.errors.email %}
-                        <h6 class="text-danger">{{ myform.errors.email  }}</h6>
-                    {% endif %}
+
                     <input type="email" class="form-control" name="email" placeholder="xyz@gmail.com" required>
         
-                    <label class="form-control-label mt-3"><b>Password:</b></label>
-                    {% if myform.errors.password1 %}
-                        <h6 class="text-danger">{{ myform.errors.password1  }}</h6>
-                    {% endif %}
-                    <input type="password" class="form-control" name="password1" placeholder="********" required>
+                    <label class="form-control-label mt-3"><b>phone:</b></label>
+
+                    <input type="number" class="form-control" name="phone" placeholder="01******" required>
 
                     <label class="form-control-label mt-3"><b>Confirm:</b></label>
-                    {% if myform.errors.password2 %}
-                        <h6 class="text-danger">{{ myform.errors.password2  }}</h6>
-                    {% endif %}
-                    <input type="password" class="form-control" name="password2" placeholder="********" required>
+
+                    <input type="text" class="form-control" name="organization" placeholder="********" required>
  
         
-                    <button class="btn btn-primary mt-3 submit">Signup</button>
+                    <button class="btn btn-primary mt-3 submit">Add</button>
                     <input type="reset" class="btn btn-warning mt-3" value="Reset">
                 </div>
             </form>
-            <div class="text-center"><a class="submitr" href="{% url 'loginpage' %}">Already have account? login</a></div>
-
         </div>
     </div>
 </div>

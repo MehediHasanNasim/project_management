@@ -4,6 +4,7 @@ from tkinter.tix import Tree
 from unicodedata import name
 from django.db import models
 from django.urls import clear_script_prefix
+from django.contrib.admin import widgets
 
 
 class Customer(models.Model):

@@ -23,7 +23,8 @@ def projects(request):
     return render(request, 'core/projects.html', context=diction) 
 
 def add_project(request):
-    myform = ProjectForm()
+    myform = ProjectForm()  
+    
     if request.method == 'POST':
             
         myform = ProjectForm(request.POST)
@@ -33,12 +34,13 @@ def add_project(request):
         customer = request.POST.get('customer')
         if myform.is_valid():
             myform.save(commit=True)
+            return redirect('/add_project')
  
                 
 
         diction = {'myform':myform}
         
-        return render(request, 'core/usersignup.html', context=diction)
+        return render(request, 'core/home.html', context=diction)
     
 
   

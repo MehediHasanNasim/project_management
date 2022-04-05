@@ -10,8 +10,9 @@ from django.core.exceptions import ValidationError
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = '__all__'
-        
+        fields = ['project_name', 'start_date', 'end_date', 'tool', 'customer']
+    
+
 
         
 
