@@ -27,11 +27,19 @@ def task(request, pk):
 
     return render(request, 'core/task.html', context)
 
-def addTask(request):
+def addTask(request): 
+
+    if request.method == 'POST':
+        t = Task(task_name = 'No Task')
+       # p = Project.objects.get(id =1)
+       # t.project.add(p)
+        t.save()
+
 
     project = Project.objects.get(pk = 1)
+
     print(request.POST)
-    
+
     return render(request, 'core/addtask.html')
 
 
