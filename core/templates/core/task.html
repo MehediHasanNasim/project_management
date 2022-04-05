@@ -1,10 +1,13 @@
 {% extends 'core/base.html' %}
 {% load static %}
     
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/notfound.css' %}">
+{% endblock extracss %}
 
     
 {% block title %}
-    home
+    projects
 {% endblock title %} 
 
     
@@ -14,10 +17,52 @@
     
 {% block bodycontent %}
 
+
+<div class="card div_main div_register ">
+    <h1 class="text-white">Projects</h1><br>
+    <div class="card-body text-dark">   
+
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Task Name</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
+                <th scope="col">Developer</th>
+                <th scope="col">Client</th>
+                <th scope="col">Priority</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if tasks %}
+
+              {% for task in tasks  %}
+              <tr>
+                <td>{{ task.task_name }}</td>
+                <td>{{ task.start_date }}</td>
+                <td>{{ task.end_date }}</td>
+                <td> 
+                  {% for i in task.developer.all %}
+                    {{ i }},    
+                  {% endfor %}
+                </td>
+                <td>{{ task.project.customer }}</td>
+                <td>{{ task.priority }}</td>
+
+              </tr>
+              {% endfor %}
+                
+              {% else %}
+            </tbody>
+        <h2 class="warning">No Task</h2>
+        {% endif %}
+    </div>
+</div>
+
+
+
 {% endblock bodycontent %}
 
-
-
+    
 {% block extrajs %}
 {% endblock extrajs %}
-    

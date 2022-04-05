@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect, HttpResponseRedirect
 from core import models
 from core.form import ProjectForm 
 from .models import Project, Customer, Tool
+from core import models 
+from .models import Project, Customer, Task, Tool
 
 
 def home(request):
@@ -38,4 +40,12 @@ def add_project(request):
     
 
   
+def task(request, pk):
+
+    tasks = Task.objects.all()
+    context = {
+        'tasks': tasks,
+    }
+
+    return render(request, 'core/task.html', context)
 

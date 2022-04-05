@@ -52,8 +52,8 @@ class TaskPriority(models.Model):
 
 class Task(models.Model):
     task_name = models.CharField(max_length=128, null=True, blank=True)
-    start_date = models.DateField(null=True, blank=True)
-    end_date = models.DateField(null=True, blank=True)
+    start_date = models.DateTimeField(null=True, blank=True)
+    end_date = models.FloatField(null=True, blank=True)
     actualTime = models.DateField(null=True, blank=True)
     developer = models.ManyToManyField(Developer, blank=True)
     project = models.ForeignKey(Project, blank=True, null=True, on_delete=models.CASCADE)
