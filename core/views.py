@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from core import models
 from core.form import ProjectForm 
-from .models import Project, Customer, Tool
+from .models import Developer, Project, Customer, Tool
 from core import models 
 from .models import Project, Customer, Task, Tool
 
@@ -53,18 +53,18 @@ def task(request, pk):
     return render(request, 'core/task.html', context)
 
 def addTask(request): 
-
+ 
     if request.method == 'POST':
-        p = Project.objects.get(id =1)
+        d = Developer.objects.get(id=1)
+
+        # p = Project.objects.get(id = 1)
         t = Task(task_name = 'No Task')
-        
+        t.developer.add(d)
+
 
        # 
        # t.project.add(p)
-        t.save()
-
-
-    project = Project.objects.get(pk = 1)
+        #t.save()
 
     print(request.POST)
 

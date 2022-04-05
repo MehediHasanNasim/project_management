@@ -55,7 +55,7 @@ class Task(models.Model):
     start_date = models.DateTimeField(null=True, blank=True)
     end_date = models.FloatField(null=True, blank=True)
     actualTime = models.DateField(null=True, blank=True)
-    developer = models.ManyToManyField(Developer, blank=True)
+    developer = models.ManyToManyField(Developer, blank=True )
     project = models.ForeignKey(Project, blank=True, null=True, on_delete=models.CASCADE, related_name='project_task')
     priority = models.ForeignKey(TaskPriority, null=True, blank=True, on_delete=models.CASCADE)
 
