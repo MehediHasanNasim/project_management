@@ -6,7 +6,7 @@ from core.form import ProjectForm
 from .models import Developer, Project, Customer, Tool
 from core import models 
 from .models import Project, Customer, Task, Tool, TaskPriority
-from . form import TaskForm
+from . form import TaskForm, ProjectForm
 
 
 def home(request):
@@ -24,26 +24,27 @@ def projects(request):
     return render(request, 'core/projects.html', context=diction) 
 
 def add_project(request):
+    context={}
+    return render(request, 'core/add_project.html', context)
+    # myform = ProjectForm()
 
 
-    myform = ProjectForm()
-
-    if request.method == 'POST':
-            
-        myform = ProjectForm(request.POST)
-        project_name= request.POST.get('project_name')
-        end_date = request.POST.get('end_date')
-        tool = request.POST.get('tool')
-        customer = request.POST.get('customer')
-        if myform.is_valid():
-            myform.save(commit=True)
-            return redirect('/add_project')
+    # if request.method == 'POST':
+             
+    #     myform = ProjectForm(request.POST)
+    #     project_name= request.POST.get('project_name')
+    #     end_date = request.POST.get('end_date')
+    #     tool = request.POST.get('tool')
+    #     customer = request.POST.get('customer')
+    #     if myform.is_valid():
+    #         myform.save(commit=True)
+    #         return redirect('/add_project')
  
                 
 
-        diction = {'myform':myform}
+    #     diction = {'myform':myform}
         
-        return render(request, 'core/home.html', context=diction)
+    #     return render(request, 'core/add_project.html', context=diction)
     
 
   

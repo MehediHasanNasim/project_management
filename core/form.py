@@ -12,8 +12,7 @@ from django.core.exceptions import ValidationError
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-<<<<<<< HEAD
-        fields = '__all__'
+        fields = ['project_name', 'start_date', 'end_date', 'tool', 'customer']
 
 
 
@@ -24,12 +23,8 @@ class TaskForm(forms.ModelForm):
         fields = '__all__'
 
 
-      
-=======
-        fields = ['project_name', 'start_date', 'end_date', 'tool', 'customer']
-    
 
->>>>>>> 73089ae283bb632fba0cb876629a2c606d12761e
+
 
         
 
