@@ -85,12 +85,12 @@ def task(request, pk):
 
     return render(request, 'core/task.html', context)
 
-def addTask(request): 
+def addTask(request, pk): 
 
    
     developers =  Developer.objects.all()
     prioritys = TaskPriority.objects.all()
-    project = Project.objects.get(id=1)
+    project = Project.objects.get(id=pk)
 
     context = {
         'developers': developers,
@@ -101,6 +101,8 @@ def addTask(request):
 
  
     if request.method == 'POST':
+
+        print(request.POST)
 
         print(request.POST)
         taskForm = TaskForm(request.POST)

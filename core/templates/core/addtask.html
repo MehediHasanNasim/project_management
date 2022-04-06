@@ -16,42 +16,48 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4">Task Name</label>
-      <input name="task_name" type="text" class="form-control" id="inputEmail4" placeholder="Task Name">
+      <input name="task_name" type="text" class="form-control" id="task_name">
     </div>
-    <div class="form-group col-md-6">
+    <div hidden class="form-group col-md-6">
       <label for="inputPassword4">Project Name</label>
-      <input  name="project_name" type="text" class="form-control" id="inputPassword4" placeholder="{{project.project_name}}" disabled>
+      <input hidden name="project" type="text" class="form-control" id="inputPassword4" value="{{project.id}}" placeholder="{{project.project_name}}">
     </div>
   </div>
   
   <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputCity">Start Time</label>
-      <input  name="start_date" type="datetime-local" class="form-control" id="inputCity">
+    <div class="form-group col-md-4">
+      <label for="start_date">Start Time</label>
+    <input onchange="startDateOnChange()" name="start_date" type="datetime-local" class="form-control" id="start_date">
     </div>
    
-    <div class="form-group col-md-6">
-      <label for="inputZip">Hour Complete Task</label>
-      <input name="end_date" type="number" class="form-control" id="inputZip">
+    <div class="form-group col-md-4">
+      <label for="end_hour">Total Hour To Complete Task</label>
+    <input onchange="startDateOnChange()" name="end_hour" type="number" value="0" class="form-control" id="end_hour">
     </div>
+
+     <div class="form-group col-md-4">
+      <label for="end_date">End Time</label>
+    <input disabled name="end_date" type="datetime-local" class="form-control" value="" id="end_date">
+    </div>
+
   </div>
 
  <div class="form-row">
   
     <div class="form-group col-md-4">
       <label for="inputState">Developer</label>
-      <select name="developer" multiple iple id="inputState" class="form-control">
+     <select onclick="onClickDev()" name="developer" multiple id="developer" class="form-control">
           {% for developer in developers  %}
              <option value="{{developer.id}}">{{developer.devoloper_name}}  </option>
           {% endfor %}
-       
+
       </select>
+      <div id="devlist">
+
+     </div>
     </div>
 
-    <div class="form-group col-md-4">
-      <label for="inputZip">Devoloper List</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
+   
 
      <div class="form-group col-md-4">
       <label for="inputState">Priority</label>
@@ -65,8 +71,69 @@
     </div>
   </div>
 
-  <input type="submit" class="btn btn-primary">Sign in</input>
+  <input type="submit" class="btn btn-primary"/>
 </form>
+
+
+<script>
+
+ 
+ function offset(iso ){
+
+         var tzoffset = iso.getTimezoneOffset() * 60000; //offset in milliseconds
+         var localISOTime = (new Date(iso - tzoffset)).toISOString().slice(0, -1);
+        return localISOTime
+    }
+    
+    function startDateOnChange(){
+
+        let end = parseInt(document.getElementById('end_hour').value)
+        let startDate = document.getElementById('start_date').value
+        let endtDate = document.getElementById('end_date')
+        let iso = new Date(startDate ) //start date convert into isostring
+
+         Date.prototype.addHours= function(h){
+                this.setHours(this.getHours()+h);
+                return this;
+        }
+
+        let addHour = new Date(offset(iso)).addHours(end)
+
+        let addHourConvert = offset(addHour)
+          endtDate.value = addHourConvert
+             console.log('a', startDate);
+            console.log(addHourConvert)
+                    
+     }
+
+//developer list
+     
+function onClickDev(){
+     var select = document.getElementById('developer');
+    var selected = [...select.options]
+                    .filter(option => option.selected)
+                    .map(option => option.innerText);
+
+    let devlist = document.getElementById('devlist')
+
+
+   // devlist.innerHTML = `<span> ${name} </span>`
+
+    let name = ''
+
+    //let x = selected.map( i => `<span> ${i} x</span>`)
+    for( i of selected){
+            name += `<span> ${i} </span>`
+    }
+
+    devlist.innerHTML = name
+
+
+}
+  
+
+
+</script>
 
 
 {% endblock bodycontent %}
