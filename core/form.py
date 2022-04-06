@@ -23,9 +23,12 @@ class TaskForm(forms.ModelForm):
         fields = '__all__'
 
 
+<<<<<<< HEAD
 
 
 
 
+=======
+>>>>>>> 16726193602b54004a9942c7ad47bc8ed7b27e6d
         
 
