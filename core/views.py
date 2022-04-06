@@ -36,7 +36,9 @@ def add_project(request):
         'customers': customers}
 
     if request.method == 'POST':
-        
+        print(request.POST)
+        myform = ProjectForm(request.POST)
+
         if myform.is_valid():
             myform.save(commit=True)
             print('Project Created')
