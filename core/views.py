@@ -25,25 +25,27 @@ def projects(request):
     return render(request, 'core/projects.html', context=diction) 
 
 def add_project(request):
-    # tool = Tool.objects.all() 
-    # diction = {}
-    # return render(request, 'core/add_project.html', context= diction)
     
-    tool = Tool.objects.all() 
-    customer = Customer.objects.all() 
+    tools = Tool.objects.all() 
+    customers = Customer.objects.all() 
     myform = ProjectForm()
+    
+    diction = {
+        'myform':myform,
+        'tools':tools,
+        'customers': customers}
+
     if request.method == 'POST':
+        
         if myform.is_valid():
             myform.save(commit=True)
-            messages.success(request, 'Account Created')
-            return redirect('home')
-        
-        
-        diction = {'myform':myform,
-                   'tool':tool,
-                   'customer': customer}
+            print('Project Created')
+            return redirect('project')
+        else:
+            print('Oops.. Try again')
  
-        return render(request, 'core/add_project.html', context=diction)
+ 
+    return render(request, 'core/add_project.html', context=diction)
 
     
 

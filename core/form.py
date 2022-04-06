@@ -23,12 +23,34 @@ class TaskForm(forms.ModelForm):
         fields = '__all__'
 
 
-<<<<<<< HEAD
+def addTask(request): 
+
+   
+    developers =  Developer.objects.all()
+    prioritys = TaskPriority.objects.all()
+    project = Project.objects.get(id=1)
+
+    context = {
+        'developers': developers,
+        'prioritys': prioritys,
+        'project': project,
+        'form': TaskForm()
+    }
+
+ 
+    if request.method == 'POST':
+
+        print(request.POST)
+        taskForm = TaskForm(request.POST)
+        
+        if taskForm.is_valid():
+            taskForm.save(commit=True)
+            print('success')
+        else:
+            print('failed')
+ 
 
 
 
-
-=======
->>>>>>> 16726193602b54004a9942c7ad47bc8ed7b27e6d
         
 

@@ -22,9 +22,6 @@
         </div>
         <div class="card-body  bg-info">
             <form action="" method="POST">
-                {% for message in messages %}
-                <h5 class="alert alert-warning">{{ message  }}</h5>
-                {% endfor %}    
 
                 {% csrf_token %}
 
@@ -44,20 +41,31 @@
                     <label class="form-control-label mt-3">tool</label>
                     <input type="text" class="form-control" name="tool" placeholder="tool" required>
 
-                    <div class="form-group col-md-4">
-                        <label for="inputState">Tool</label>
-                        <select name="tool" multiple iple id="inputState" class="form-control">
-                            {% for tool in Tools  %}
+                    <div class="form-group col-md-4 text=dark">
+                        <select name="tool" multiple id="inputState" class="form-control">
+                            <option disabled selected>Choose...</option>
+                            {% for tool in tools  %}
                                <option value="{{tool.id}}">{{tool.tool_name}}  </option>
                             {% endfor %}
                          
                         </select>
                       </div>
+                    <div class="form-group col-md-4 text=dark ">
+                        <label for="inputState">Customer</label>
+                        <select name="customer" id="inputState" class="form-control">
+                          <option disabled selected>Choose...</option>
+                              {% for customer in customers %}
+                                <option value="{{customer.id}}">{{customer.customer_name}}</option>
+                              {% endfor %}
+                      
+                        </select>
+                    </div>
                 
         
-                    <button class="btn btn-primary mt-3">Add</button>
-                    <input type="reset" class="btn btn-warning mt-3" value="Reset">
+
                 </div>
+                <input type="submit" class="btn btn-primary mt-3"></input>
+                <input type="reset" class="btn btn-warning mt-3" value="Reset"></input>
             </form>
 
             <br><a href="{% url 'home' %}">Home</a>
