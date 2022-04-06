@@ -15,52 +15,53 @@
 
 {% block bodycontent %}
 
-<h1><a class="nav-link heading_write" href="{% url 'home' %}">Back to Home?</a></h1>
-<div class=" div_main div_register">
-    <div >
-        <div>
-            <h1 class="h1">Add Project</h1>
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-info">
+            <h5 class="text-center text-white">Add Project</h5>
         </div>
-        <div >      
-                {% for message in messages %}
-                    <h5 class="alert alert-warning">{{ message  }}</h5>
-                {% endfor %}              
-                
-            <form class="form_register" action="" method="POST">
-             
+        <div class="card-body  bg-info">
+            <form action="" method="POST">
                 {% csrf_token %}
 
-                <div>
+                <div class="form-group" >
+                    <label class="form-control-label mt-3">Project Name </label>
+                    <input type="text" class="form-control" name="project_name" placeholder="Project Name" >
+    
+                    <label class="form-control-label mt-3">Start Date: </label>
+                    <input type="datetime-local" class="form-control" name="start_date" placeholder="starting time" >
 
-                    <label class="form-control-label mt-3"><b>Username:</b></label>
-                    
-                    <input type="text" class="form-control" name="username" placeholder="Username" required>
+                    <label class="form-control-label mt-3">end_date</label>
+                    <input type="datetime-local" class="form-control" name="end_date" placeholder="ending time" >
 
-                    <label class="form-control-label mt-3"><b>Email:</b></label>
-                    {% if myform.errors.email %}
-                        <h6 class="text-danger">{{ myform.errors.email  }}</h6>
-                    {% endif %}
-                    <input type="email" class="form-control" name="email" placeholder="xyz@gmail.com" required>
-        
-                    <label class="form-control-label mt-3"><b>Password:</b></label>
-                    {% if myform.errors.password1 %}
-                        <h6 class="text-danger">{{ myform.errors.password1  }}</h6>
-                    {% endif %}
-                    <input type="password" class="form-control" name="password1" placeholder="********" required>
+                    <label class="form-control-label mt-3">Tool</label>
 
-                    <label class="form-control-label mt-3"><b>Confirm:</b></label>
-                    {% if myform.errors.password2 %}
-                        <h6 class="text-danger">{{ myform.errors.password2  }}</h6>
-                    {% endif %}
-                    <input type="password" class="form-control" name="password2" placeholder="********" required>
- 
-        
-                    <button class="btn btn-primary mt-3 submit">Signup</button>
-                    <input type="reset" class="btn btn-warning mt-3" value="Reset">
+                    <div class="form-group col-md-4 text=dark">
+                        <select name="tool" multiple id="inputState" class="form-control">
+                            <option disabled selected>Choose...</option>
+                            {% for tool in tools  %}
+                               <option value="{{tool.id}}">{{tool.tool_name}}  </option>
+                            {% endfor %}
+                         
+                        </select>
+                      </div>
+                    <div class="form-group col-md-4 text=dark ">
+                        <label for="inputState">Customer</label>
+                        <select name="customer" id="inputState" class="form-control">
+                          <option disabled selected>Tools</option>
+                              {% for customer in customers %}
+                                <option value="{{customer.id}}">{{customer.customer_name}}</option>
+                              {% endfor %}
+                      
+                        </select>
+                    </div>
+                
+
                 </div>
+                <input type="submit" value="Save" class="btn btn-primary mt-3">
             </form>
-            <div class="text-center"><a class="submitr" href="{% url 'loginpage' %}">Already have account? login</a></div>
 
+            <br><a href="{% url 'home' %}">Home</a>
         </div>
     </div>
 </div>
@@ -69,10 +70,6 @@
     
 
 {% block extrajs %}
-<script>
-    $(document).ready(function () {
-      window.history.replaceState('', '', window.location.href);
-    });
-  </script>
+
 {% endblock extrajs %}
     
