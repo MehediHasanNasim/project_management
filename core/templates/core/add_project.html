@@ -22,6 +22,10 @@
         </div>
         <div class="card-body  bg-info">
             <form action="" method="POST">
+                {% for message in messages %}
+                <h5 class="alert alert-warning">{{ message  }}</h5>
+                {% endfor %}    
+
                 {% csrf_token %}
 
                 <div class="form-group" >
@@ -32,13 +36,24 @@
                     <input type="email" class="form-control" name="email" placeholder="xyz@gmail.com" required>
         
                     <label class="form-control-label mt-3">Start Date: </label>
-                    <input type="number" class="form-control" name="start_date" placeholder="starting time" required>
+                    <input type="datetime-local" class="form-control" name="start_date" placeholder="starting time" required>
 
                     <label class="form-control-label mt-3">end_date</label>
-                    <input type="number" class="form-control" name="end_date" placeholder="ending time" required>
+                    <input type="datetime-local" class="form-control" name="end_date" placeholder="ending time" required>
 
                     <label class="form-control-label mt-3">tool</label>
                     <input type="text" class="form-control" name="tool" placeholder="tool" required>
+
+                    <div class="form-group col-md-4">
+                        <label for="inputState">Tool</label>
+                        <select name="tool" multiple iple id="inputState" class="form-control">
+                            {% for tool in Tools  %}
+                               <option value="{{tool.id}}">{{tool.tool_name}}  </option>
+                            {% endfor %}
+                         
+                        </select>
+                      </div>
+                
         
                     <button class="btn btn-primary mt-3">Add</button>
                     <input type="reset" class="btn btn-warning mt-3" value="Reset">

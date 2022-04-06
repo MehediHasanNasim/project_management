@@ -1,4 +1,5 @@
 from multiprocessing import context
+from pyexpat.errors import messages
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from core import models
@@ -24,13 +25,34 @@ def projects(request):
     return render(request, 'core/projects.html', context=diction) 
 
 def add_project(request):
-    context={}
-    return render(request, 'core/add_project.html', context)
-    # myform = ProjectForm()
+    # tool = Tool.objects.all() 
+    # diction = {}
+    # return render(request, 'core/add_project.html', context= diction)
+    
+    tool = Tool.objects.all() 
+    customer = Customer.objects.all() 
+    myform = ProjectForm()
+    if request.method == 'POST':
+        if myform.is_valid():
+            myform.save(commit=True)
+            messages.success(request, 'Account Created')
+            return redirect('home')
+        
+        
+        diction = {'myform':myform,
+                   'tool':tool,
+                   'customer': customer}
+ 
+        return render(request, 'core/add_project.html', context=diction)
+
+    
+
+
+    #return render(request, 'core/add_project.html', context)
+    # myform = ProjectForm()      #tool & customer 
 
 
     # if request.method == 'POST':
-             
     #     myform = ProjectForm(request.POST)
     #     project_name= request.POST.get('project_name')
     #     end_date = request.POST.get('end_date')
@@ -68,9 +90,9 @@ def addTask(request):
 
     context = {
         'developers': developers,
-         'prioritys': prioritys,
-         'project': project,
-         'form': TaskForm()
+        'prioritys': prioritys,
+        'project': project,
+        'form': TaskForm()
     }
 
  
