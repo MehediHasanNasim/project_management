@@ -28,12 +28,16 @@ def add_project(request):
     
     tools = Tool.objects.all() 
     customers = Customer.objects.all() 
-    myform = ProjectForm()
-    
+    myform = ProjectForm()    
     diction = {
         'myform':myform,
         'tools':tools,
-        'customers': customers}
+        'customers': customers
+    
+    }
+
+    print(request.POST)
+
 
     if request.method == 'POST':
         print(request.POST)
@@ -42,7 +46,7 @@ def add_project(request):
         if myform.is_valid():
             myform.save(commit=True)
             print('Project Created')
-            return redirect('project')
+            return redirect('projects')
         else:
             print('Oops.. Try again')
  
@@ -101,15 +105,12 @@ def addTask(request, pk):
 
  
     if request.method == 'POST':
-
-        print(request.POST)
-
         print(request.POST)
         taskForm = TaskForm(request.POST)
         
         if taskForm.is_valid():
             taskForm.save(commit=True)
-            print('success')
+            return redirect('/')
         else:
             print('failed')
 
@@ -134,6 +135,23 @@ def addTask(request, pk):
         #     t.developer.add(i)
 
     return render(request, 'core/addtask.html', context)
+
+
+def updateTask(request, pk):
+
+    developers =  Developer.objects.all()
+    prioritys = TaskPriority.objects.all()
+    project = Project.objects.get(id=pk)
+
+    context = {
+        'developers': developers,
+        'prioritys': prioritys,
+        'project': project,
+        'form': TaskForm()
+    }
+
+
+    return  render(request, 'core/update-task.html', context)
 
 
 def test(request, pk):
