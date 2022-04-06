@@ -18,10 +18,10 @@
       <label for="inputEmail4">Task Name</label>
       <input name="task_name" type="text" class="form-control" id="task_name">
     </div>
-    <!-- <div class="form-group col-md-6">
+    <div hidden class="form-group col-md-6">
       <label for="inputPassword4">Project Name</label>
-      <input  name="project_name" type="text" class="form-control" id="inputPassword4" placeholder="{{project.project_name}}" disabled>
-    </div> -->
+      <input hidden name="project" type="text" class="form-control" id="inputPassword4" value="{{project.id}}" placeholder="{{project.project_name}}">
+    </div>
   </div>
   
   <div class="form-row">
@@ -46,18 +46,18 @@
   
     <div class="form-group col-md-4">
       <label for="inputState">Developer</label>
-      <select name="developer" multiple iple id="inputState" class="form-control">
+     <select onclick="onClickDev()" name="developer" multiple id="developer" class="form-control">
           {% for developer in developers  %}
              <option value="{{developer.id}}">{{developer.devoloper_name}}  </option>
           {% endfor %}
-       
+
       </select>
+      <div id="devlist">
+
+     </div>
     </div>
 
-    <div class="form-group col-md-4">
-      <label for="inputZip">Devoloper List</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
+   
 
      <div class="form-group col-md-4">
       <label for="inputState">Priority</label>
@@ -71,7 +71,7 @@
     </div>
   </div>
 
-  <input type="submit" class="btn btn-primary">Sign in</input>
+  <input type="submit" class="btn btn-primary"/>
 </form>
 
 
@@ -105,6 +105,32 @@
             console.log(addHourConvert)
                     
      }
+
+//developer list
+     
+function onClickDev(){
+     var select = document.getElementById('developer');
+    var selected = [...select.options]
+                    .filter(option => option.selected)
+                    .map(option => option.innerText);
+
+    let devlist = document.getElementById('devlist')
+
+
+   // devlist.innerHTML = `<span> ${name} </span>`
+
+    let name = ''
+
+    //let x = selected.map( i => `<span> ${i} x</span>`)
+    for( i of selected){
+            name += `<span> ${i} </span>`
+    }
+
+    devlist.innerHTML = name
+
+
+}
+  
 
 
 </script>
