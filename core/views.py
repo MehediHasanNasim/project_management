@@ -11,6 +11,8 @@ from .models import Developer, Project, Customer, Tool
 from core import models 
 from .models import Project, Customer, Task, Tool, TaskPriority
 from . form import TaskForm, ProjectForm, UpdateTaskForm
+from django.contrib import messages
+
 
 
 def home(request):
@@ -36,7 +38,6 @@ def add_project(request):
         'myform':myform,
         'tools':tools,
         'customers': customers
-    
     }
 
 
@@ -57,10 +58,7 @@ def add_project(request):
 
 
 def task(request, pk):
-
-
     project = Project.objects.get(id=pk)
-
     context = {
         'tasks': project.project_task.all(),
         'project': project
@@ -81,12 +79,14 @@ def addTask(request, pk):
         'form': TaskForm()
     }
 
+
     if request.method == 'POST':
         print(request.POST)
         taskForm = TaskForm(request.POST)
         
         if taskForm.is_valid():
             taskForm.save(commit=True)
+            messages.success(request, 'Form submission successful')
             return redirect('task', pk=pk)
         else:
             print('failed')

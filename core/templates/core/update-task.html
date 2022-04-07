@@ -11,30 +11,38 @@
 {% block bodycontent %}
 
 
+<div class="container mt-4 fw-bolder">
+    <div class="card">
+        <div class="card-header bg-primary">
+            <h5 class="text-center text-white"><b>{{task.task_name}}</b></h5>
+        </div>
+        <div class="card-body  bg-warning">
+
 <form method="POST">
     {% csrf_token %}
 
-  
-  <div class="form-row">
-    <div class="form-group col-md-4">
+      <div class="form-group">
       <label for="start_date">Start Time</label>
-    <input onchange="startDateOnChange()" value="{{start_date}}" name="start_date" type="datetime-local" class="form-control" id="start_date">
+        <input onchange="startDateOnChange()" value="{{start_date}}" name="start_date" type="datetime-local" class="form-control" id="start_date">
     </div>
    
-    <div class="form-group col-md-4">
+    <div class="form-group">
       <label for="end_hour">Actual Hour To Complete Task</label>
     <input onkeyup="startDateOnChange()" name="end_hour" type="number" value="0" class="form-control" id="end_hour">
     </div>
 
-     <div class="form-group col-md-4">
+     <div class="form-group">
       <label for="end_date">End Time</label>
     <input  name="end_date" type="datetime-local" class="form-control" value="" id="end_date">
     </div>
 
-  </div>
 
   <input type="submit" class="btn btn-primary"/>
 </form>
+
+</div>
+</div>
+</div>
 
 
 <script>

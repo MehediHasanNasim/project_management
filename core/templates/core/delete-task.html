@@ -10,17 +10,22 @@
     
 {% block bodycontent %}
 
-<br>
-<form method="POST">
-    {% csrf_token %}
-    
-     <div class="alert alert-danger" role="alert">
-        Do you really want to delete?
+
+
+<div class="container mt-4 fw-bolder">
+    <div class="card">
+        <div class="card-header bg-primary">
+            <h5 class="text-center text-white"><b>Do you really want to delete?</b></h5>
+        </div>
+        <div class="card-body  bg-warning">
+        <form method="POST">
+            {% csrf_token %}
+            <a class="btn btn-sm btn-success" href="{% url 'task' 5 %}">Cancel</a>
+            <input value="Delete" type="submit" class="btn btn-sm btn-danger"/>
+        </form>
+        </div>
     </div>
-    <a class="btn btn-sm btn-success" href="{% url 'task' 5 %}">Cancel</a>
-    <input type="submit" class="btn btn-sm btn-danger"/>
-   
-</form>
+</div>
 
 
 <script>
