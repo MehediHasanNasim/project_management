@@ -11,72 +11,68 @@
 {% block bodycontent %}
 
 
+<div class="container mt-4 fw-bolder">
+    <div class="card">
+        <div class="card-header bg-primary">
+            <h5 class="text-center text-white"><b>{{task.task_name}}</b></h5>
+        </div>
+        <div class="card-body  bg-warning">
+
 <form method="POST">
     {% csrf_token %}
-  <div class="form-row">
-    
-    <div hidden class="form-group col-md-6">
-      <label for="inputPassword4">Project Name</label>
-      <input hidden name="project" type="text" class="form-control" id="inputPassword4" value="{{project.id}}" placeholder="{{project.project_name}}">
-    </div>
-  </div>
-  
-  <div class="form-row">
-    <div class="form-group col-md-4">
+
+      <div class="form-group">
       <label for="start_date">Start Time</label>
-    <input onchange="startDateOnChange()" name="start_date" type="datetime-local" class="form-control" id="start_date">
+        <input onchange="startDateOnChange()" value="{{start_date}}" name="start_date" type="datetime-local" class="form-control" id="start_date">
     </div>
    
-    <div class="form-group col-md-4">
-      <label for="end_hour">Total Hour To Complete Task</label>
-    <input onchange="startDateOnChange()" name="end_hour" type="number" value="0" class="form-control" id="end_hour">
+    <div class="form-group">
+      <label for="end_hour">Actual Hour To Complete Task</label>
+    <input onkeyup="startDateOnChange()" name="end_hour" type="number" value="0" class="form-control" id="end_hour">
     </div>
 
-     <div class="form-group col-md-4">
+     <div class="form-group">
       <label for="end_date">End Time</label>
-    <input disabled name="end_date" type="datetime-local" class="form-control" value="" id="end_date">
+    <input  name="end_date" type="datetime-local" class="form-control" value="" id="end_date">
     </div>
 
-  </div>
-
- <div class="form-row">
-  
-    <div class="form-group col-md-4">
-      <label for="inputState">Developer</label>
-     <select onclick="onClickDev()" name="developer" multiple id="developer" class="form-control">
-          {% for developer in developers  %}
-             <option value="{{developer.id}}">{{developer.devoloper_name}}  </option>
-          {% endfor %}
-
-      </select>
-      <div id="devlist">
-
-     </div>
-    </div>
-
-   
-
-     <div class="form-group col-md-4">
-      <label for="inputState">Priority</label>
-      <select name="priority" id="inputState" class="form-control">
-        <option disabled selected>Choose...</option>
-            {% for priority in prioritys %}
-             <option value="{{priority.id}}">{{priority.priority}}</option>
-            {% endfor %}
-    
-      </select>
-    </div>
-  </div>
 
   <input type="submit" class="btn btn-primary"/>
 </form>
 
+</div>
+</div>
+</div>
+
 
 <script>
+function offset(iso ){
 
+         var tzoffset = iso.getTimezoneOffset() * 60000; //offset in milliseconds
+         var localISOTime = (new Date(iso - tzoffset)).toISOString().slice(0, -1);
+        return localISOTime  
+    }
+    
+    function startDateOnChange(){
 
+        let end = parseInt(document.getElementById('end_hour').value)
+        let startDate = document.getElementById('start_date').value
+        let endtDate = document.getElementById('end_date')
+        let iso = new Date(startDate ) //start date convert into isostring
 
-  
+         Date.prototype.addHours= function(h){
+                this.setHours(this.getHours()+h);
+                return this;
+        }
+
+        let addHour = new Date(offset(iso)).addHours(end)
+
+        let addHourConvert = offset(addHour)
+          endtDate.value = addHourConvert
+             console.log('a', startDate);
+            console.log(addHourConvert)
+                    
+     }
 
 
 </script>

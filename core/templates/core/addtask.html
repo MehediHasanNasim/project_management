@@ -10,74 +10,69 @@
     
 {% block bodycontent %}
 
+<div class="container mt-4 fw-bolder">
+    <div class="card">
+        <div class="card-header bg-primary">
+            <h5 class="text-center text-white"><b>Add Task</b></h5>
+        </div>
+        <div class="card-body  bg-warning">
 
-<form method="POST">
-    {% csrf_token %}
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputEmail4">Task Name</label>
-      <input name="task_name" type="text" class="form-control" id="task_name">
-    </div>
-    <div hidden class="form-group col-md-6">
-      <label for="inputPassword4">Project Name</label>
-      <input hidden name="project" type="text" class="form-control" id="inputPassword4" value="{{project.id}}" placeholder="{{project.project_name}}">
-    </div>
-  </div>
-  
-  <div class="form-row">
-    <div class="form-group col-md-4">
-      <label for="start_date">Start Time</label>
-    <input onchange="startDateOnChange()" name="start_date" type="datetime-local" class="form-control" id="start_date">
-    </div>
-   
-    <div class="form-group col-md-4">
-      <label for="end_hour">Total Hour To Complete Task</label>
-    <input onchange="startDateOnChange()" name="end_hour" type="number" value="0" class="form-control" id="end_hour">
-    </div>
-
-     <div class="form-group col-md-4">
-      <label for="end_date">End Time</label>
-    <input disabled name="end_date" type="datetime-local" class="form-control" value="" id="end_date">
-    </div>
-
-  </div>
-
- <div class="form-row">
-  
-    <div class="form-group col-md-4">
-      <label for="inputState">Developer</label>
-     <select onclick="onClickDev()" name="developer" multiple id="developer" class="form-control">
-          {% for developer in developers  %}
-             <option value="{{developer.id}}">{{developer.devoloper_name}}  </option>
-          {% endfor %}
-
-      </select>
-      <div id="devlist">
-
-     </div>
-    </div>
-
-   
-
-     <div class="form-group col-md-4">
-      <label for="inputState">Priority</label>
-      <select name="priority" id="inputState" class="form-control">
-        <option disabled selected>Choose...</option>
-            {% for priority in prioritys %}
-             <option value="{{priority.id}}">{{priority.priority}}</option>
-            {% endfor %}
+    <form method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="task_name">Add Task</label>
+        <input name="task_name" type="text" class="form-control" id="task_name">
+      </div>
+      <div hidden class="form-group">
+        <label for="inputPassword4">Project Name</label>
+        <input hidden name="project" type="text" class="form-control" id="inputPassword4" value="{{project.id}}" placeholder="{{project.project_name}}">
+      </div>
     
-      </select>
-    </div>
-  </div>
+      <div class="form-group">
+        <label for="start_date">Start Time</label>
+      <input onchange="startDateOnChange()" name="start_date" type="datetime-local" class="form-control" id="start_date">
+      </div>
+    
+      <div class="form-group">
+        <label for="end_hour">Total Hour To Complete Task</label>
+      <input onkeyup="startDateOnChange()" name="end_hour" type="number" value="0" class="form-control" id="end_hour">
+      </div>
 
-  <input type="submit" class="btn btn-primary"/>
+      <div class="form-group">
+        <label for="end_date">End Time</label>
+      <input  name="end_date" type="datetime-local" class="form-control" value="" id="end_date">
+      </div>
+    
+      <div class="form-group">
+        <label for="developer">Developer</label>
+      <select onclick="onClickDev()" name="developer" multiple id="developer" class="form-control">
+            {% for developer in developers  %}
+              <option value="{{developer.id}}">{{developer.devoloper_name}}  </option>
+            {% endfor %}
+
+        </select>
+        <div id="devlist">
+      </div>
+      </div>
+
+      <div class="form-group">
+        <label for="priority">Priority</label>
+        <select name="priority" id="priority" class="form-control">
+          <option disabled selected>Choose...</option>
+              {% for priority in prioritys %}
+              <option value="{{priority.id}}">{{priority.priority}}</option>
+              {% endfor %}
+        </select>
+      </div>
+
+    <input type="submit" class="btn btn-primary"/>
 </form>
 
-
+    </div>
+  </div>
+</div>
 <script>
 
- 
  function offset(iso ){
 
          var tzoffset = iso.getTimezoneOffset() * 60000; //offset in milliseconds
@@ -115,12 +110,9 @@ function onClickDev(){
                     .map(option => option.innerText);
 
     let devlist = document.getElementById('devlist')
-
-
    // devlist.innerHTML = `<span> ${name} </span>`
 
     let name = ''
-
     //let x = selected.map( i => `<span> ${i} x</span>`)
     for( i of selected){
             name += `<span> ${i} </span>`
@@ -128,11 +120,8 @@ function onClickDev(){
 
     devlist.innerHTML = name
 
-
 }
   
-
-
 </script>
 
 

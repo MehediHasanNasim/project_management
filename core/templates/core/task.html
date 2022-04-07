@@ -25,7 +25,9 @@
           <a href="{% url 'update-task' 5%}" class="bnt btn-sm btn-warning" >Update Task?</a>
     </h1><br>
     <div class="card-body text-dark">   
-
+      <div class="alert alert-primary" role="alert">
+          Project Name: {{ project.project_name}}
+       </div>
         <table class="table">
             <thead>
               <tr>
@@ -35,6 +37,7 @@
                 <th scope="col">Developer</th>
                 <th scope="col">Client</th>
                 <th scope="col">Priority</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -52,6 +55,10 @@
                 </td>
                 <td>{{ task.project.customer }}</td>
                 <td>{{ task.priority }}</td>
+                <td>
+                  <a class="btn btn-sm btn-success" href="{% url 'update-task' task.id %}">Update</a>
+                  <a class="btn btn-sm btn-danger" href="{% url 'delete-task' task.id %}">Delete</a>
+                </td>
 
               </tr>
               {% endfor %}
