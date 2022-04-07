@@ -11,13 +11,6 @@
 {% block bodycontent %}
 
 <div class="container mt-4 fw-bolder">
-  {% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
-    {% endfor %}
-</ul>
-{% endif %}
     <div class="card">
         <div class="card-header bg-primary">
             <h5 class="text-center text-white"><b>Add Task</b></h5>
@@ -26,8 +19,6 @@
 
     <form method="POST">
       {% csrf_token %}
-
-    
       <div class="form-group">
         <label for="task_name">Add Task</label>
         <input name="task_name" type="text" class="form-control" id="task_name">
@@ -77,11 +68,9 @@
     <input type="submit" class="btn btn-primary"/>
 </form>
 
+    </div>
+  </div>
 </div>
-</div>
-</div>
-
-
 <script>
 
  function offset(iso ){
@@ -133,8 +122,6 @@ function onClickDev(){
 
 }
   
-
-
 </script>
 
 

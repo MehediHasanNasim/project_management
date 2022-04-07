@@ -62,7 +62,6 @@ def task(request, pk):
     context = {
         'tasks': project.project_task.all(),
         'project': project
-
     }
 
     return render(request, 'core/task.html', context)
@@ -86,11 +85,9 @@ def addTask(request, pk):
         
         if taskForm.is_valid():
             taskForm.save(commit=True)
-            messages.success(request, 'Form submission successful')
             return redirect('task', pk=pk)
         else:
             print('failed')
-
     return render(request, 'core/addtask.html', context)
 
 
@@ -126,18 +123,13 @@ def deleteTask(request, pk):
 
     task = Task.objects.get(id=pk)
     project_id = task.project.id
-
-    print(project_id)
-
     context = {
         'project_id': project_id
     }
 
     if request.method == 'POST':
         task.delete()
-
         return redirect('task', project_id)
-
 
     return render(request, 'core/delete-task.html')
 
