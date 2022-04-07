@@ -27,8 +27,8 @@ class Project(models.Model):
 
     
     project_name = models.CharField(max_length=100, null=True, blank=Tree)
-    start_date = models.DateField(null=True, blank=True)
-    end_date = models.DateField(null=True, blank=True)
+    start_date = models.DateTimeField(null=True, blank=True)
+    end_date = models.DateTimeField(null=True, blank=True)
     tool = models.ManyToManyField(Tool, blank=True)
     customer = models.ForeignKey(Customer, null=True, on_delete=models.CASCADE)
 

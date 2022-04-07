@@ -36,12 +36,11 @@ def add_project(request):
     
     }
 
-    print(request.POST)
-
 
     if request.method == 'POST':
         print(request.POST)
         myform = ProjectForm(request.POST)
+        
 
         if myform.is_valid():
             myform.save(commit=True)
@@ -53,31 +52,6 @@ def add_project(request):
  
     return render(request, 'core/add_project.html', context=diction)
 
-    
-
-
-    #return render(request, 'core/add_project.html', context)
-    # myform = ProjectForm()      #tool & customer 
-
-
-    # if request.method == 'POST':
-    #     myform = ProjectForm(request.POST)
-    #     project_name= request.POST.get('project_name')
-    #     end_date = request.POST.get('end_date')
-    #     tool = request.POST.get('tool')
-    #     customer = request.POST.get('customer')
-    #     if myform.is_valid():
-    #         myform.save(commit=True)
-    #         return redirect('/add_project')
- 
-                
-
-    #     diction = {'myform':myform}
-        
-    #     return render(request, 'core/add_project.html', context=diction)
-    
-
-  
 
 def task(request, pk):
 
@@ -110,7 +84,7 @@ def addTask(request, pk):
         
         if taskForm.is_valid():
             taskForm.save(commit=True)
-            return redirect('/')
+            return redirect('home')
         else:
             print('failed')
 
