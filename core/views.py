@@ -8,6 +8,7 @@ from .models import Developer, Project, Customer, Tool
 from core import models 
 from .models import Project, Customer, Task, Tool, TaskPriority
 from . form import TaskForm, ProjectForm
+from core import form
 
 
 def home(request):
@@ -17,6 +18,7 @@ def home(request):
         }
     return render(request, 'core/home.html', context) 
 
+
 def projects(request):
     project_list = Project.objects.all().order_by('project_name')
     diction= {
@@ -24,8 +26,8 @@ def projects(request):
         }
     return render(request, 'core/projects.html', context=diction) 
 
+
 def add_project(request):
-    
     tools = Tool.objects.all() 
     customers = Customer.objects.all() 
     myform = ProjectForm()    
@@ -33,10 +35,7 @@ def add_project(request):
         'myform':myform,
         'tools':tools,
         'customers': customers
-    
     }
-
-
     if request.method == 'POST':
         print(request.POST)
         myform = ProjectForm(request.POST)
@@ -48,9 +47,41 @@ def add_project(request):
             return redirect('projects')
         else:
             print('Oops.. Try again')
- 
- 
     return render(request, 'core/add_project.html', context=diction)
+
+
+def project_info(request, id):
+    project = Project.objects.filter(pk=id)
+    if project:
+        project= Project.objects.get(pk=id)
+    diction = {'project':project}
+    print('project')
+    return render (request, 'core/project_info.html', context=diction)
+
+
+def project_update(request, project_id):
+    project_info = Project.objects.get(pk=project_id)
+    update_form = form.ProjectForm(instance=project_info)
+
+    if request.method =="POST":
+        update_form = form.ProjectForm(request.POST, instance=project_info)
+        
+        if update_form.is_valid():
+            update_form.save(commit=True)
+            return projects(request)
+
+    diction = {'update_form': update_form}
+    return render (request, 'core/project_update.html', context=diction)
+
+
+def project_delete(request, project_id):
+    project= Project.objects.get(pk=project_id).delete()
+    diction = {'delete_message': "Delete Done"}
+    return render (request, 'core/project_delete.html', context=diction)
+
+
+
+
 
 
 def task(request, pk):

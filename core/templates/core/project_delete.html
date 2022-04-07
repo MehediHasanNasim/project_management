@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+
+{% block extracss %}
+
+{% endblock extracss %}
+
+
+{% block title %}
+Project delete
+{% endblock title %}
+
+
+
+
+{% block bodycontent %}
+
+<div class="alert alert-danger"> {{ delete_message }} </div>
+
+<a href="{% url 'home' %}" class="btn btn-primary">Back to Home?</a><br>
+
+{% endblock bodycontent %}
+
+
+{% block extrajs %}
+{% endblock extrajs %}

@@ -23,11 +23,14 @@
     <h1 class=" text-dark " >Projects</h1><br>
     <div class="card-body text-dark"> 
       <h1> <a href="{% url 'add_project' %}" class="bnt btn-sm btn-success" >Add Project</a> </h1>   
+      {% comment %} <h1> <a href="{% url 'project_update' project.id %}" class="bnt btn-sm btn-success" >Update Project</a> </h1>   {% endcomment %}
+      {% comment %} <h1> <a href="{% url 'project_info' project.id %}" class="bnt btn-sm btn-success" >info Project</a> </h1>   {% endcomment %}
 
         <table class="table">
 
-            <thead>
+            {% comment %} <thead>
               <tr>
+                <th scope="col">Project Id</th>
                 <th scope="col">Project Name</th>
                 <th scope="col">Start_date</th>
                 <th scope="col">End_date</th>
@@ -35,23 +38,35 @@
                 <th scope="col">Customer</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody> {% endcomment %}
+
               {% if project_list %}
 
               {% for project in project_list  %}
-              <tr>
-                <td>{{ project.project_name }}</td>
-                <td>{{ project.start_date }}</td>
-                <td>{{ project.end_date }}</td>
-                <td> 
-                  {% for i in project.tool.all %}
-                    {{ i }},    
-                  {% endfor %}
-                </td>
-                <td>{{ project.customer.customer_name }}
 
-                </td>
-              </tr>
+              <li> <a  class="div_register" href="{% url 'project_info' project.id %}">
+                <b> Project Name:    &nbsp;&nbsp;    {{ project.project_name }}-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Start at:    &nbsp;&nbsp;        {{ project.start_date }}-         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    End at:      &nbsp;&nbsp;        {{ project.end_date}}-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Customer:    &nbsp;&nbsp;        {{ project.customer.customer_name }} </b> </a> <br></li>
+
+
+              {% comment %} <tr>
+                <a  class="div_register" href="{% url 'project_info' project.id %}">
+                  <td>{{ project.id }}</td>
+                  <td>{{ project.project_name }}</td>
+                  <td>{{ project.start_date }}</td>
+                  <td>{{ project.end_date }}</td>
+                  <td> 
+                    {% for i in project.tool.all %}
+                      {{ i }},    
+                    {% endfor %}
+                  </td>
+                  <td>{{ project.customer.customer_name }}
+
+                  </td>
+                </a>
+              </tr> {% endcomment %}
               {% endfor %}
                 
               {% else %}
@@ -67,9 +82,11 @@
 </div>
 
 
+
+
 {% endblock bodycontent %}
 
     
-{% block extrajs %}
+{% comment %} {% block extrajs %}
 {% endblock extrajs %}
-    
+     {% endcomment %}

@@ -34,9 +34,7 @@ class Project(models.Model):
 
     def __str__(self):
         return self.project_name
-
-
-
+    
 
 class Developer(models.Model):
     devoloper_name = models.CharField(max_length=32, blank=True)
