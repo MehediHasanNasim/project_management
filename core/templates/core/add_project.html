@@ -11,34 +11,32 @@
 {% endblock title %}  
 
 
-
-
 {% block bodycontent %}
 
-<div class="container mt-4">
+<div class="container mt-4 fw-bolder">
     <div class="card">
-        <div class="card-header bg-info">
-            <h5 class="text-center text-white">Add Project</h5>
+        <div class="card-header bg-primary">
+            <h5 class="text-center text-white"><b>Add Project</b></h5>
         </div>
-        <div class="card-body  bg-info">
+        <div class="card-body  bg-warning">
             <form action="" method="POST">
                 {% csrf_token %}
 
                 <div class="form-group" >
-                    <label class="form-control-label mt-3">Project Name </label>
+                    <label class="form-control-label mt-3"><b>Project Name :</b></label>
                     <input type="text" class="form-control" name="project_name" placeholder="Project Name" >
     
-                    <label class="form-control-label mt-3">Start Date: </label>
+                    <label class="form-control-label mt-3"><b>Start Date:  </b></label>
                     <input type="datetime-local" class="form-control" name="start_date" placeholder="starting time" >
 
-                    <label class="form-control-label mt-3">end_date</label>
+                    <label class="form-control-label mt-3"><b>end_date :</b></label>
                     <input type="datetime-local" class="form-control" name="end_date" placeholder="ending time" >
 
-                    <label class="form-control-label mt-3">Tool</label>
+                    <label class="form-control-label mt-3"><b> Tool :</b> </label>
 
                     <div class="form-group col-md-4 text=dark">
                         <select name="tool" multiple id="inputState" class="form-control">
-                            <option disabled selected>Choose...</option>
+                            <option disabled selected><b>Choose...</b></option>
                             {% for tool in tools  %}
                                <option value="{{tool.id}}">{{tool.tool_name}}  </option>
                             {% endfor %}
@@ -46,7 +44,7 @@
                         </select>
                       </div>
                     <div class="form-group col-md-4 text=dark ">
-                        <label for="inputState">Customer</label>
+                        <label for="inputState"><b>Customer :</b></label>
                         <select name="customer" id="inputState" class="form-control">
                           <option disabled selected>Tools</option>
                               {% for customer in customers %}
@@ -59,12 +57,15 @@
 
                 </div>
                 <input type="submit" value="Save" class="btn btn-primary mt-3">
+                <input type="reset" class="btn btn-primary mt-3" value="Reset"></input>
+
             </form>
 
             <br><a href="{% url 'home' %}">Home</a>
         </div>
     </div>
 </div>
+
 
 {% endblock bodycontent %}
     

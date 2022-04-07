@@ -13,9 +13,10 @@
 
 <form method="POST">
     {% csrf_token %}
+
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="inputEmail4">Task Name</label>
+      <label for="task_name">Task Name</label>
       <input name="task_name" type="text" class="form-control" id="task_name">
     </div>
     <div hidden class="form-group col-md-6">
@@ -32,12 +33,12 @@
    
     <div class="form-group col-md-4">
       <label for="end_hour">Total Hour To Complete Task</label>
-    <input onchange="startDateOnChange()" name="end_hour" type="number" value="0" class="form-control" id="end_hour">
+    <input onchange="onkeyup()" name="end_hour" type="number" value="0" class="form-control" id="end_hour">
     </div>
 
      <div class="form-group col-md-4">
       <label for="end_date">End Time</label>
-    <input disabled name="end_date" type="datetime-local" class="form-control" value="" id="end_date">
+    <input  name="end_date" type="datetime-local" class="form-control" value="" id="end_date">
     </div>
 
   </div>
@@ -45,7 +46,7 @@
  <div class="form-row">
   
     <div class="form-group col-md-4">
-      <label for="inputState">Developer</label>
+      <label for="developer">Developer</label>
      <select onclick="onClickDev()" name="developer" multiple id="developer" class="form-control">
           {% for developer in developers  %}
              <option value="{{developer.id}}">{{developer.devoloper_name}}  </option>
@@ -60,8 +61,8 @@
    
 
      <div class="form-group col-md-4">
-      <label for="inputState">Priority</label>
-      <select name="priority" id="inputState" class="form-control">
+      <label for="priority">Priority</label>
+      <select name="priority" id="priority" class="form-control">
         <option disabled selected>Choose...</option>
             {% for priority in prioritys %}
              <option value="{{priority.id}}">{{priority.priority}}</option>
@@ -82,7 +83,7 @@
 
          var tzoffset = iso.getTimezoneOffset() * 60000; //offset in milliseconds
          var localISOTime = (new Date(iso - tzoffset)).toISOString().slice(0, -1);
-        return localISOTime
+        return localISOTime  
     }
     
     function startDateOnChange(){
