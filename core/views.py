@@ -1,11 +1,8 @@
-from urllib import response
 from dateutil import parser
-from datetime import timedelta, datetime
+from datetime import timedelta
 from pyexpat.errors import messages
-from django import http
 from django.http import HttpResponse
-from django.shortcuts import render, redirect, HttpResponseRedirect
-from core import models
+from django.shortcuts import render, redirect
 from core.form import ProjectForm 
 from .models import Developer, Project, Customer, Tool
 from core import models 
@@ -13,7 +10,6 @@ from .models import Project, Customer, Task, Tool, TaskPriority
 from . form import TaskForm, ProjectForm
 from core import form
 from . form import TaskForm, ProjectForm, UpdateTaskForm
-from django.contrib import messages
 
 
 
@@ -32,7 +28,6 @@ def projects(request):
         'project_list':project_list
         }
     return render(request, 'core/projects.html', context=diction) 
-
 
 def add_project(request):
     tools = Tool.objects.all() 
@@ -137,13 +132,14 @@ def updateTask(request, pk):
     project_id = task.project.id
     
     start_date = parser.parse(str(task.start_date + timedelta(hours=6))).strftime('%Y-%m-%dT%H:%M')
-    print(start_date)
+    task_form = UpdateTaskForm(instance= task)
 
     context = {
         'developers': developers,
         'prioritys': prioritys,
         'task': task,
-        'start_date': start_date
+        'start_date': start_date,
+        'task_form': task_form,
     }
 
     if request.method == 'POST':
