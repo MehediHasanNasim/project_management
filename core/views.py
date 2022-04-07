@@ -1,5 +1,8 @@
-from multiprocessing import context
+from urllib import response
+from dateutil import parser
+from datetime import timedelta, datetime
 from pyexpat.errors import messages
+from django import http
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from core import models
@@ -7,7 +10,7 @@ from core.form import ProjectForm
 from .models import Developer, Project, Customer, Tool
 from core import models 
 from .models import Project, Customer, Task, Tool, TaskPriority
-from . form import TaskForm, ProjectForm
+from . form import TaskForm, ProjectForm, UpdateTaskForm
 
 
 def home(request):
@@ -56,16 +59,17 @@ def add_project(request):
 def task(request, pk):
 
 
-    tasks = Project.objects.get(id=pk).project_task.all()
+    project = Project.objects.get(id=pk)
+
     context = {
-        'tasks': tasks,
+        'tasks': project.project_task.all(),
+        'project': project
+
     }
 
     return render(request, 'core/task.html', context)
 
 def addTask(request, pk): 
-
-   
     developers =  Developer.objects.all()
     prioritys = TaskPriority.objects.all()
     project = Project.objects.get(id=pk)
@@ -77,36 +81,15 @@ def addTask(request, pk):
         'form': TaskForm()
     }
 
- 
     if request.method == 'POST':
         print(request.POST)
         taskForm = TaskForm(request.POST)
         
         if taskForm.is_valid():
             taskForm.save(commit=True)
-            return redirect('home')
+            return redirect('task', pk=pk)
         else:
             print('failed')
-
-
-
-        # request.POST['task_name'] = 'aabc'
-        # task_name = request.POST.get('task_name')
-        # start_date = request.POST.get('start_date')
-        # end_date = request.POST.get('end_date')
-        # actualTime = request.POST.get('actualTime')
-        # developer = request.POST.get('developer')
-        # #project = request.POST.get('project')
-        # priority = request.POST.get('priority')
-        # end_date = request.POST.get('end_date')
-
-        # devs = Developer.objects.filter(id__in = developer)
-        # priority = TaskPriority.objects.get(id=priority)
-
-        # t = Task(task_name = task_name, start_date=start_date, end_date = end_date, actualTime=actualTime, priority=priority, project=project)    
-        # t.save()
-        # for i in devs:
-        #     t.developer.add(i)
 
     return render(request, 'core/addtask.html', context)
 
@@ -115,17 +98,48 @@ def updateTask(request, pk):
 
     developers =  Developer.objects.all()
     prioritys = TaskPriority.objects.all()
-    project = Project.objects.get(id=pk)
+    task = Task.objects.get(id=pk)
+    project_id = task.project.id
+    
+    start_date = parser.parse(str(task.start_date + timedelta(hours=6))).strftime('%Y-%m-%dT%H:%M')
+    print(start_date)
 
     context = {
         'developers': developers,
         'prioritys': prioritys,
-        'project': project,
-        'form': TaskForm()
+        'task': task,
+        'start_date': start_date
     }
 
-
+    if request.method == 'POST':
+        print(request.POST)
+        task_form = UpdateTaskForm(request.POST, instance= task)
+        if task_form.is_valid():
+            task_form.save(commit=True)
+            return redirect('task', pk=project_id)
+        else:
+            print('failed')
     return  render(request, 'core/update-task.html', context)
+
+
+def deleteTask(request, pk):
+
+    task = Task.objects.get(id=pk)
+    project_id = task.project.id
+
+    print(project_id)
+
+    context = {
+        'project_id': project_id
+    }
+
+    if request.method == 'POST':
+        task.delete()
+
+        return redirect('task', project_id)
+
+
+    return render(request, 'core/delete-task.html')
 
 
 def test(request, pk):
@@ -135,11 +149,3 @@ def test(request, pk):
 
 
 
-
-
-
-#  'task_name': [''], 'start_date': [''], 'end_date': [''], 'actualTime': [''], 'project': [''], 'priority': ['']
-#     if request.method == 'POST':
-
-
-#  'task_name': [''], 'start_date': [''], 'end_date': ['']}>

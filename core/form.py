@@ -17,10 +17,16 @@ class ProjectForm(forms.ModelForm):
 
 
 class TaskForm(forms.ModelForm):
-
     class  Meta:
         model = Task
         fields = '__all__'
+
+class UpdateTaskForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = [ 'start_date', 'end_date']
+
+
 
 
 

@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}
+    projects
+{% endblock title %} 
+
+{% block homeactive %}
+{% endblock homeactive %}
+    
+{% block bodycontent %}
+
+<br>
+<form method="POST">
+    {% csrf_token %}
+    
+     <div class="alert alert-danger" role="alert">
+        Do you really want to delete?
+    </div>
+    <a class="btn btn-sm btn-success" href="{% url 'task' 5 %}">Cancel</a>
+    <input type="submit" class="btn btn-sm btn-danger"/>
+   
+</form>
+
+
+<script>
+</script>
+
+
+{% endblock bodycontent %}
+
+    
+{% block extrajs %}
+{% endblock extrajs %}
+    
