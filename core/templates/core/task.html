@@ -19,11 +19,10 @@
 
 <div class="card div_main div_register ">
     <h1 class="">&nbsp;&nbsp;&nbsp;
-<<<<<<< HEAD
-          <a href="{% url 'add-task' 5%}" class="bnt btn-sm btn-success" >Add Task</a>
-=======
-          <a href="{% url 'add-task' project.id %}" class="bnt btn-sm btn-success" >Add Task</a>
->>>>>>> bb621560541fffe2d42c357c19c7617e51c59924
+
+
+        <a href="{% url 'add-task' project.id %}" class="bnt btn-sm btn-success" >Add Task</a>
+
     </h1><br>
     <div class="card-body text-dark">   
       <div class="alert alert-primary" role="alert">
@@ -31,14 +30,14 @@
        </div>
         <table class="table">
             <thead>
-              <tr>
-                <th scope="col">Task Name</th>
-                <th scope="col">Start Time</th>
-                <th scope="col">End Time</th>
-                <th scope="col">Developer</th>
-                <th scope="col">Client</th>
-                <th scope="col">Priority</th>
-                <th scope="col">Action</th>
+              <tr class="bg-dark border-dark">
+                <th scope="col" class="text-white">Task Name</th>
+                <th scope="col" class="text-white">Start Time</th>
+                <th scope="col" class="text-white">End Time</th>
+                <th scope="col" class="text-white">Developer</th>
+                <th scope="col" class="text-white">Client</th>
+                <th scope="col" class="text-white">Priority</th>
+                <th scope="col" class="text-white">Action</th>
               </tr>
             </thead>
             <tbody>

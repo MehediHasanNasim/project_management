@@ -14,29 +14,40 @@ Project update
 
 
 {% block bodycontent %}
-<body class="my_body">
-    <h2 class="p-1 text-dark text-center mt-0 infohead">Do you like to update this Project {{ project.project_name }}?</h2>
+<div class="container mt-4 fw-bolder"> 
+    <div class="card"> 
+        <div class="card-header bg-dark"> 
+            <body class="my_body"> 
 
-<div class="p-3 card-body h4">
+                <body class="my_body">
+                    <h2 class="p-1 text-primary text-center mt-0 infohead">Do you like to update this Project {{ project.project_name }}?</h2>
+                
+                <div class="p-3 card-body h4">
+                
+                <div class="p-3 card-body h4">
+                    <form action="" method="POST" class="text-white" >
+                        {% csrf_token %}
+                
+                        <div class="card-body">
+                        <h4 class="text-white">Project Name :  {{ update_form.project_name }}</h4>
+                        <h4 class="text-white">start_date : {{ update_form.start_date }}</h4>
+                        <h4 class="text-white">end_date : {{ update_form.end_date }}</h4>
+                        <h4 class="text-white">tool : {{ update_form.tool }}</h4>
+                        <h4 class="text-white">customer : {{ update_form.customer }}</h4>
+                        <input type="submit" value="Update" class="btn btn-warning"> 
+                        <a href="{% url 'home' %}" class="btn btn-primary">Back to Home?</a><br>
+                        {% comment %} <a href=" {% url 'project_delete' project.id %} " class="btn btn-danger">Delete</a> {% endcomment %}
+                
+                        </div>
 
-<div class="p-3 card-body h4">
-    <form action="" method="POST" class="text-white text-center" >
-        {% csrf_token %}
-
-        <div class="card-body">
-        <h4 class="text-dark">Project Name :  {{ update_form.project_name }}</h4>
-        <h4 class="text-dark">start_date : {{ update_form.start_date }}</h4>
-        <h4 class="text-dark">end_date : {{ update_form.end_date }}</h4>
-        <h4 class="text-dark">tool : {{ update_form.tool }}</h4>
-        <h4 class="text-dark">customer : {{ update_form.customer }}</h4>
-        <input type="submit" value="update" class="btn-success">
-        {% comment %} <a href=" {% url 'project_delete' project.id %} " class="btn btn-danger">Delete</a> {% endcomment %}
-
+                
+                </div>
+                
+                
+            </div>
         </div>
-        <a href="{% url 'home' %}" class="btn btn-primary">Back to Home?</a><br>
-
+    </div>
 </div>
-
 
 
 
