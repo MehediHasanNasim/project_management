@@ -86,6 +86,10 @@ def project_delete(request, project_id):
     diction = {'delete_message': "Delete Done"}
     return render (request, 'core/project_delete.html', context=diction)
 
+def location(request):
+    diction= {}
+    return render(request, 'core/location.html', context=diction) 
+
 
 
 

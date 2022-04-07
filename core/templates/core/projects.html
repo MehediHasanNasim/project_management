@@ -18,10 +18,14 @@
 {% block bodycontent %}
 
 
-<div class="card div_main div_register ">
+</div>
+  <div class="card"> 
+    <div class="card-header bg-dark"> 
+        <body class="my_body">  
 
-    <h1 class=" text-dark " >Projects</h1><br>
-    <div class="card-body text-dark"> 
+<div class="card div_main div_register bg-white">
+    <h1 class=" text-dark text-center border border-primary" ><b> List of Projects </b></h1><br>
+    <div class="card-body text-dark "> 
       <h1> <a href="{% url 'add_project' %}" class="bnt btn-sm btn-success" >Add Project</a> </h1>   
       {% comment %} <h1> <a href="{% url 'project_update' project.id %}" class="bnt btn-sm btn-success" >Update Project</a> </h1>   {% endcomment %}
       {% comment %} <h1> <a href="{% url 'project_info' project.id %}" class="bnt btn-sm btn-success" >info Project</a> </h1>   {% endcomment %}
@@ -67,15 +71,13 @@
                   </td>
                 </a>
               </tr> {% endcomment %}
+
+
               {% endfor %}
                 
               {% else %}
             </tbody>
                     
-
-      
-
-    
         <h2>No Projects</h2>
         {% endif %}
     </div>
