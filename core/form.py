@@ -1,12 +1,5 @@
-from dataclasses import field
-from pyexpat import model
 from django import forms
-from core import models
-from django.contrib.auth.forms import UserCreationForm
-from django.forms import ModelForm
-from .models import Project, Tool, Developer, TaskPriority, Task
-from django.core import validators
-from django.core.exceptions import ValidationError
+from .models import Project,Task
 
 
 class ProjectForm(forms.ModelForm):
@@ -24,7 +17,7 @@ class TaskForm(forms.ModelForm):
 class UpdateTaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = [ 'start_date', 'end_date']
+        fields = [ 'start_date', 'end_date', 'actual_hour']
 
 
 
