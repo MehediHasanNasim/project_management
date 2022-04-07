@@ -17,7 +17,7 @@ class TaskForm(forms.ModelForm):
 class UpdateTaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = [ 'start_date', 'end_date', 'actual_hour']
+        fields = ['end_date', 'actual_hour']
 
 
 
