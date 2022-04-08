@@ -1,3 +1,4 @@
+from multiprocessing import context
 from dateutil import parser
 from datetime import timedelta
 from pyexpat.errors import messages
@@ -10,6 +11,7 @@ from .models import Project, Customer, Task, Tool, TaskPriority
 from . form import TaskForm, ProjectForm
 from core import form
 from . form import TaskForm, ProjectForm, UpdateTaskForm
+from django.http import JsonResponse
 
 
 
@@ -167,6 +169,29 @@ def deleteTask(request, pk):
 
     return render(request, 'core/delete-task.html')
 
+def jqGridApi(request):
+
+   p = Project.objects.get(id=5)
+   task_list = list(p.project_task.all().values())
+ 
+   #t = p.task._set.all()
+   #t = project.task_set.all()
+
+   #s = project.task_set.all()
+
+   context = {
+        'tasks': list(project.project_task.all()),
+        'project': project
+    }
+   return JsonResponse(task_list, safe=False)
+def jqGrid(request):
+
+  
+   context = {
+        'tasks': '',
+        'project': 'project'
+    }
+   return render (request, 'core/jqgrid.html', context)
 
 def test(request, pk):
 
