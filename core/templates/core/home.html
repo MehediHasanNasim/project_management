@@ -8,6 +8,8 @@ home
 {% block homeactive %} 
 active
 {% endblock homeactive %} 
+{% block projectactive %}
+{% endblock projectactive %}
 
 {% block bodycontent %}
 <br>
@@ -25,7 +27,7 @@ active
               <b>Deadline: {{project.end_date}} to {{project.start_date}}</b>
             </p>
             <p class="card-text text-white"><b>Progress: 90%</b></p>
-            <a class="btn btn-primary" href="{% url 'task' project.id %}">View</a>
+            <a class="btn btn-primary text-dark" href="{% url 'task' project.id %}"><b>View</b></a>
             </div>
           </div>
         </div>

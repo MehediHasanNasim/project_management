@@ -18,15 +18,15 @@
 {% block bodycontent %}
 
 <div class="card div_main div_register ">
-    <h1 class="">&nbsp;&nbsp;&nbsp;
+    <h2 class="">&nbsp;&nbsp;&nbsp;
 
 
         <a href="{% url 'add-task' project.id %}" class="bnt btn-sm btn-success" >Add Task</a>
 
-    </h1><br>
+    </h2><br>
     <div class="card-body text-dark">   
       <div class="alert alert-primary" role="alert">
-          Project Name: {{ project.project_name}}
+        <b>Project Name: {{ project.project_name}}</b>
        </div>
         <table class="table">
             <thead>

@@ -28,10 +28,13 @@
       
           <div class="card-body">
             <h4 class="text-white">Project Name :  {{ project.project_name }}</h4>
-            <h4 class="text-white">start_date : {{ project.start_date }}</h4>
-            <h4 class="text-white">end_date : {{ project.end_date }}</h4>
-            <h4 class="text-white">tool : {{ project.tool }}</h4>
-            <h4 class="text-white">customer : {{ project.customer }}</h4>
+            <h4 class="text-white">Start date : {{ project.start_date }}</h4>
+            <h4 class="text-white">End date : {{ project.end_date }}</h4>
+            <h4 class="text-white">Tool :
+                                        {% for i in project.tool.all %}
+                                        {{ i }},
+                                        {% endfor %}</h4>
+            <h4 class="text-white">Customer : {{ project.customer }}</h4>
       
           </div>
       

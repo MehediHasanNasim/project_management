@@ -12,38 +12,29 @@
 
     
 {% block projectactive %}
-active
+  active
 {% endblock projectactive %}
 
     
 {% block bodycontent %}
 
-
-</div>
+<br>
+<div class="container mt-4 fw-bolder"> 
   <div class="card"> 
-    <div class="card-header bg-dark"> 
+    
+  </div>
+  <div class="card"> 
+    <div class="card-header bg-secondary border-dark"> 
         <body class="my_body">  
 
-<div class="card div_main div_register bg-white">
-    <h1 class=" text-dark text-center border border-primary" ><b> List of Projects </b></h1><br>
+<div class="card div_main div_register bg-secondary">
+    <h1 class=" text-dark text-center border border-dark" ><b> List of Projects </b></h1>
     <div class="card-body text-dark "> 
-      <h1> <a href="{% url 'add_project' %}" class="bnt btn-sm btn-success" >Add Project</a> </h1>   
+      <h1> <a href="{% url 'add_project' %}" class="bnt btn-sm btn-success" ><b>Add Project</b></a> </h1>   
       {% comment %} <h1> <a href="{% url 'project_update' project.id %}" class="bnt btn-sm btn-success" >Update Project</a> </h1>   {% endcomment %}
       {% comment %} <h1> <a href="{% url 'project_info' project.id %}" class="bnt btn-sm btn-success" >info Project</a> </h1>   {% endcomment %}
 
-        <table class="table">
-
-            {% comment %} <thead>
-              <tr>
-                <th scope="col">Project Id</th>
-                <th scope="col">Project Name</th>
-                <th scope="col">Start_date</th>
-                <th scope="col">End_date</th>
-                <th scope="col">Tools</th>
-                <th scope="col">Customer</th>
-              </tr>
-            </thead>
-            <tbody> {% endcomment %}
+        {% comment %} <table class="table">
 
               {% if project_list %}
 
@@ -53,26 +44,11 @@ active
                 <b> Project Name:    &nbsp;&nbsp;    {{ project.project_name }}-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     Start at:    &nbsp;&nbsp;        {{ project.start_date }}-         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     End at:      &nbsp;&nbsp;        {{ project.end_date}}-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    Customer:    &nbsp;&nbsp;        {{ project.customer.customer_name }} </b> </a> <br></li>
-
-
-              {% comment %} <tr>
-                <a  class="div_register" href="{% url 'project_info' project.id %}">
-                  <td>{{ project.id }}</td>
-                  <td>{{ project.project_name }}</td>
-                  <td>{{ project.start_date }}</td>
-                  <td>{{ project.end_date }}</td>
-                  <td> 
+                    Tool:        &nbsp;&nbsp;
                     {% for i in project.tool.all %}
-                      {{ i }},    
-                    {% endfor %}
-                  </td>
-                  <td>{{ project.customer.customer_name }}
-
-                  </td>
-                </a>
-              </tr> {% endcomment %}
-
+                           {{ i }},
+                    {% endfor %}                                                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Customer:    &nbsp;&nbsp;        {{ project.customer.customer_name }} </b> </a> <br></li>
 
               {% endfor %}
                 
@@ -83,7 +59,66 @@ active
         {% endif %}
     </div>
 </div>
+--------------------- {% endcomment %}
+<div>
 
+
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Project Name</th>
+        <th scope="col">Click for Project Info</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row"></th>
+        <td>
+          
+
+          {% if project_list %}
+  
+          {% for project in project_list  %}
+          
+          <div> <div  class="">
+            <b>{{ project.project_name }}</b> </div> 
+
+          {% endfor %}
+          {% else %}
+  
+          <h2>No Projects</h2>
+          {% endif %}
+            </div>
+
+        </td>
+        <td>
+
+
+          {% if project_list %}
+  
+          {% for project in project_list  %}
+          
+          <li> <a  class="div_register" href="{% url 'project_info' project.id %}">
+            <b>{{ project.project_name }}</b> </a> <br></li> 
+          {% endfor %}
+                          
+          {% else %}
+          
+                
+          <h2>No Projects</h2>
+          {% endif %}
+            </div>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+
+
+  </div>
+</div>
 
 
 
