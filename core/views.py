@@ -180,8 +180,8 @@ def jqGridApi(request):
    #s = project.task_set.all()
 
    context = {
-        'tasks': list(project.project_task.all()),
-        'project': project
+        'tasks': 'list(project.project_task.all())',
+        'project': 'project'
     }
    return JsonResponse(task_list, safe=False)
 def jqGrid(request):
