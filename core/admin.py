@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from . models import Tool, Project, Customer, Developer, Task, TaskPriority
 
 admin.site.register(Tool)

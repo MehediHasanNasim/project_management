@@ -54,19 +54,13 @@ class Task(models.Model):
     end_hour = models.FloatField(null=True, blank=True)
     actual_hour = models.FloatField(null=True, blank=True)
     developer = models.ManyToManyField(Developer, blank=True )
-    project = models.ForeignKey(Project, blank=True, null=True, on_delete=models.CASCADE, related_name='project_task')
+    project = models.ForeignKey(Project, blank=True, null=True, on_delete=models.CASCADE)
     priority = models.ForeignKey(TaskPriority, null=True, blank=True, on_delete=models.CASCADE)
 
 
 
     def __str__(self):
         return self.task_name
-
-
-
-
-
-
 
 
 

@@ -89,13 +89,10 @@ def location(request):
 
 
 
-
-
-
 def task(request, pk):
     project = Project.objects.get(id=pk)
     context = {
-        'tasks': project.project_task.all(),
+        'tasks': project.task_set.all(),
         'project': project
     }
 
@@ -170,20 +167,50 @@ def deleteTask(request, pk):
     return render(request, 'core/delete-task.html')
 
 def jqGridApi(request):
+   
+   project = Project.objects.get(id=5)
+   tasks = project.task_set.all()
+   #task_list = list(t.values())[0:1]
+  # print(t[0].project.project_name)
+   #print('devs', t[0].developer)
+   print('dev:',tasks[0].developer)
+   print('dev:',tasks[1].developer.all())
+   print('dev:',tasks[2].developer.all())
 
-   p = Project.objects.get(id=5)
-   task_list = list(p.project_task.all().values())
- 
-   #t = p.task._set.all()
-   #t = project.task_set.all()
+   dev_name = ''
 
-   #s = project.task_set.all()
+   def developerLits(dev):
+       dev_name = ''
+       for i in dev:
+            print(i)
+            dev_name +=str(i)+','
+       return dev_name
 
+   all_tasks = []
+
+   for i in tasks:
+       task = {
+        "id": i.id,
+       "task_name": i.task_name,
+       "start_date": i.start_date,
+       "end_date": i.start_date,
+       "developers": developerLits(i.developer.all()),
+       "priority": i.priority.priority
+
+       }
+
+       all_tasks.append(task)
+        
+
+  
    context = {
-        'tasks': list(project.project_task.all()),
-        'project': project
+        'tasks': '',
+        'project': 'project'
     }
-   return JsonResponse(task_list, safe=False)
+  
+   return JsonResponse(all_tasks, safe=False)
+
+
 def jqGrid(request):
 
   
