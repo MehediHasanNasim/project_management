@@ -35,7 +35,6 @@
                 <th scope="col" class="text-white">Start Time</th>
                 <th scope="col" class="text-white">End Time</th>
                 <th scope="col" class="text-white">Developer</th>
-                <th scope="col" class="text-white">Client</th>
                 <th scope="col" class="text-white">Priority</th>
                 <th scope="col" class="text-white">Action</th>
               </tr>
@@ -53,7 +52,6 @@
                     {{ i }},    
                   {% endfor %}
                 </td>
-                <td>{{ task.project.customer }}</td>
                 <td>{{ task.priority }}</td>
                 <td>
                   <a class="btn btn-sm btn-success" href="{% url 'update-task' task.id %}">Update</a>
