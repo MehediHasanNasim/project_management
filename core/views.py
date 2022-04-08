@@ -1,3 +1,4 @@
+from multiprocessing import context
 from dateutil import parser
 from datetime import timedelta
 from pyexpat.errors import messages
@@ -10,6 +11,7 @@ from .models import Project, Customer, Task, Tool, TaskPriority
 from . form import TaskForm, ProjectForm
 from core import form
 from . form import TaskForm, ProjectForm, UpdateTaskForm
+from django.http import JsonResponse
 
 
 
@@ -87,13 +89,10 @@ def location(request):
 
 
 
-
-
-
 def task(request, pk):
     project = Project.objects.get(id=pk)
     context = {
-        'tasks': project.project_task.all(),
+        'tasks': project.task_set.all(),
         'project': project
     }
 
@@ -167,6 +166,46 @@ def deleteTask(request, pk):
 
     return render(request, 'core/delete-task.html')
 
+def jqGridApi(request):
+   
+   project = Project.objects.get(id=5)
+   tasks = project.task_set.all()
+
+   dev_name = ''
+   def developerLits(dev):
+       dev_name = ''
+       for i in dev:
+            print(i)
+            dev_name +=str(i)+','
+       return dev_name
+
+   all_tasks = []
+
+   for i in tasks:
+       task = {
+        "id": i.id,
+       "task_name": i.task_name,
+       "start_date": i.start_date,
+       "end_date": i.start_date,
+       "developers": developerLits(i.developer.all()),
+       "priority": i.priority.priority
+
+       }
+
+       all_tasks.append(task)
+        
+
+   return JsonResponse(all_tasks, safe=False)
+
+
+def jqGrid(request):
+
+  
+   context = {
+        'tasks': '',
+        'project': 'project'
+    }
+   return render (request, 'core/jqgrid.html', context)
 
 def test(request, pk):
 

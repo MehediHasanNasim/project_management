@@ -8,6 +8,8 @@ urlpatterns = [
     path('add-task/<int:pk>/', views.addTask, name='add-task'),
     path('update-task/<int:pk>/', views.updateTask, name='update-task'),
     path('delete-task/<int:pk>/', views.deleteTask, name='delete-task'),
+    path('jq-grid/', views.jqGrid, name='jq-grid'),
+    path('api/jq-grid/', views.jqGridApi, name='api/jq-grid'),
 
     path('add_project/', views.add_project, name='add_project'),
     path('project_info/<int:id>/', views.project_info, name="project_info"),

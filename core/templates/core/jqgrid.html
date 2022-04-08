@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Your page title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/redmond/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.14.0/css/ui.jqgrid.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.14.0/jquery.jqgrid.min.js"></script>
+    <script>
+   
+   $(document).ready(function(){
+	$("#photos").jqGrid({
+		url:'http://127.0.0.1:8000/api/jq-grid/',
+		datatype: "json",
+		colNames:['ID','Task Name', 'Start Date', 'End Date', 'Developers', 'priority'],
+		colModel:[
+			{name:'id',index:'id', width:55},
+			{name:'task_name',index:'task_name', width:200},
+			{name:'start_date',index:'start_date', width:200},
+			{name:'end_date',index:'end_date', width:200},
+			{name:'developers',index:'developers', width:200},
+			{name:'priority',index:'priority', width:200},
+		
+		],
+		rowNum:10,
+		loadonce: true,
+		rowList:[10,20,30],
+		pager: '#pager2',
+		sortname: 'id',
+		viewrecords: true,
+		sortorder: "desc",
+		caption:""
+	});
+});
+   
+   
+   //<![CDATA[
+    // $(function () {
+    //     "use strict";
+    //     $("#grid").jqGrid({
+    //         colModel: [
+    //             { name: "firstName" },
+    //             { name: "lastName" }
+    //         ],
+    //         data: [
+    //             { id: 10, firstName: "Angela", lastName: "Merkel" },
+    //             { id: 20, firstName: "Vladimir", lastName: "Putin" },
+    //             { id: 30, firstName: "David", lastName: "Cameron" },
+    //             { id: 40, firstName: "Barack", lastName: "Obama" },
+    //             { id: 50, firstName: "François", lastName: "Hollande" }
+    //         ]
+    //     });
+    // });
+    // //]]>
+    // </script>
+</head>
+<body>
+
+    
+	<table id="photos" class="display" cellspacing="0" width="100%">
+	</table>
+	<div id="pager2">
+
+    </div>
+
+<table id="grid">
+
+
+</table>
+</body>
+</html>
